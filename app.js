@@ -500,55 +500,131 @@ function showHome() {
    8. SCREEN — CHECK-IN
    ──────────────────────────────────────────────────────────── */
 
-var _ciState = { symptoms: [], mood: null, note: '', voiceText: '' };
-var _voiceBlob = null;
+var _ciState      = { symptoms: [], mood: null, note: '', voiceText: '' };
+var _voiceBlob    = null;    // MediaRecorder Blob captured this session
+var _voiceAudioUrl = null;   // object URL for local playback
+var _voiceTimer   = null;    // recording countdown interval
+var _voiceSeconds = 0;       // elapsed recording seconds
 
+// ── showCheckin ───────────────────────────────────────────────
+// Renders immediately from localStorage cache.
+// If Supabase is available, silently refreshes cache in background.
 function showCheckin() {
   var day   = getCurrentDay();
   var today = getTodayISO();
-  var prev  = DB.getCheckin(today);
   var vrOk  = VoiceRecorder.isSupported();
 
+  // Load from localStorage cache (instant)
+  var prev = DB.getCheckin(today);
   if (prev) {
     _ciState.symptoms  = prev.symptoms  || [];
     _ciState.mood      = prev.mood      || null;
     _ciState.note      = prev.note_text || '';
     _ciState.voiceText = prev.voice_transcript || '';
+    if (prev.voice_note_url && !_voiceBlob) _voiceAudioUrl = prev.voice_note_url;
   } else {
-    _ciState = { symptoms: [], mood: null, note: '', voiceText: '' };
+    _ciState      = { symptoms: [], mood: null, note: '', voiceText: '' };
+    _voiceBlob    = null;
+    _voiceAudioUrl = null;
   }
 
+  _renderCheckin(day, today, vrOk);
+
+  // Background sync from Supabase — updates local cache for next open
+  if (window._supabaseClient) {
+    CheckinService.loadToday(today).then(function(remote) {
+      if (!remote) return;
+      DB.saveCheckin(today, {
+        date:              today,
+        day:               day,
+        symptoms:          (remote.daily_checkin_symptoms || []).map(function(s) { return s.symptom_slug; }),
+        mood:              remote.mood,
+        note_text:         remote.note_text,
+        voice_transcript:  remote.voice_transcript,
+        voice_note_url:    remote.voice_note_url,
+        saved_at:          remote.checkin_timestamp,
+      });
+    }).catch(function() { /* ignore — local cache is fine */ });
+  }
+}
+
+function _renderCheckin(day, today, vrOk) {
   var sympHtml = CHECK_IN_SYMPTOMS.map(function(s) {
     var chk = _ciState.symptoms.indexOf(s.slug) > -1;
-    return '<div class="ci-item ' + (chk ? 'checked' : '') + '" onclick="ciToggle(this,\'' + esc(s.slug) + '\')" role="checkbox" aria-checked="' + chk + '">' +
-      '<div class="ci-checkbox"><span class="material-symbols-outlined">check</span></div>' +
-      '<div><div class="ci-text">' + esc(s.label) + '</div><div class="ci-normal">' + esc(s.note) + '</div></div>' +
-    '</div>';
+    return (
+      '<div class="ci-item ' + (chk ? 'checked' : '') + '" ' +
+           'onclick="ciToggle(this,\'' + esc(s.slug) + '\')" ' +
+           'role="checkbox" aria-checked="' + chk + '">' +
+        '<div class="ci-checkbox"><span class="material-symbols-outlined">check</span></div>' +
+        '<div>' +
+          '<div class="ci-text">'   + esc(s.label) + '</div>' +
+          '<div class="ci-normal">' + esc(s.note)  + '</div>' +
+        '</div>' +
+      '</div>'
+    );
   }).join('');
 
   var moodHtml = MOODS.map(function(m) {
-    return '<button class="mood-btn ' + (_ciState.mood === m.key ? 'selected' : '') + '" onclick="ciSetMood(\'' + m.key + '\',this)">' +
-      '<span class="mood-emoji">' + m.emoji + '</span>' +
-      '<span class="mood-label">' + esc(m.label) + '</span>' +
-    '</button>';
+    return (
+      '<button class="mood-btn ' + (_ciState.mood === m.key ? 'selected' : '') + '" ' +
+              'onclick="ciSetMood(\'' + m.key + '\',this)">' +
+        '<span class="mood-emoji">' + m.emoji     + '</span>' +
+        '<span class="mood-label">' + esc(m.label) + '</span>' +
+      '</button>'
+    );
   }).join('');
 
+  // Voice note — three explicit states: idle / recording / recorded
+  var hasVoice = !!_voiceAudioUrl;
   var voiceHtml = vrOk
-    ? '<div class="voice-row">' +
-        '<button class="voice-mic-btn" id="ci-mic-btn" onclick="ciToggleVoice()" title="Record voice note" aria-label="Record voice note">' +
-          '<span class="material-symbols-outlined" id="ci-mic-icon">mic</span>' +
-        '</button>' +
-        '<div class="voice-transcript-box" id="ci-transcript">' +
-          (_ciState.voiceText ? esc(_ciState.voiceText) : '<span style="color:var(--on-surface-var);font-style:italic;">Tap mic to dictate your note...</span>') +
+    ? '<div class="voice-section">' +
+
+        // STATE: idle (default when nothing recorded yet)
+        '<div class="voice-state" id="ci-vs-idle" style="' + (hasVoice ? 'display:none;' : '') + '">' +
+          '<button class="voice-mic-btn" onclick="ciToggleVoice()" aria-label="Record voice note">' +
+            '<span class="material-symbols-outlined">mic</span>' +
+          '</button>' +
+          '<span class="voice-hint">Tap to record a voice note</span>' +
         '</div>' +
-      '</div>' +
-      '<div id="ci-voice-status" class="voice-status" style="display:none;">Recording...</div>'
+
+        // STATE: recording
+        '<div class="voice-state" id="ci-vs-recording" style="display:none;">' +
+          '<button class="voice-mic-btn recording" onclick="ciToggleVoice()" aria-label="Stop recording">' +
+            '<span class="material-symbols-outlined">stop</span>' +
+          '</button>' +
+          '<div class="voice-recording-info">' +
+            '<span class="voice-rec-dot"></span>' +
+            '<span class="voice-rec-label">Recording</span>' +
+            '<span class="voice-rec-timer" id="ci-rec-timer">0:00</span>' +
+          '</div>' +
+        '</div>' +
+
+        // STATE: recorded — show playback controls
+        '<div class="voice-state voice-state--recorded" id="ci-vs-recorded" style="' + (!hasVoice ? 'display:none;' : '') + '">' +
+          '<audio id="ci-voice-audio" src="' + (hasVoice ? _voiceAudioUrl : '') + '" preload="metadata"></audio>' +
+          '<button class="voice-play-btn" id="ci-play-btn" onclick="ciPlayVoice()" aria-label="Play voice note">' +
+            '<span class="material-symbols-outlined" id="ci-play-icon">play_arrow</span>' +
+            '<span id="ci-play-label">Play</span>' +
+          '</button>' +
+          '<button class="voice-delete-btn" onclick="ciDeleteVoice()" aria-label="Delete voice note" title="Delete recording">' +
+            '<span class="material-symbols-outlined">delete</span>' +
+          '</button>' +
+          '<button class="voice-rerecord-btn" onclick="ciReRecord()" aria-label="Re-record">' +
+            '<span class="material-symbols-outlined" style="font-size:.875rem;">mic</span> Re-record' +
+          '</button>' +
+        '</div>' +
+
+        // Transcript box — hidden when empty
+        '<div class="voice-transcript-box" id="ci-transcript" style="' + (_ciState.voiceText ? '' : 'display:none;') + '">' +
+          esc(_ciState.voiceText) +
+        '</div>' +
+
+      '</div>'
     : '<p class="voice-unsupported">Voice notes require Chrome or Edge on Android/desktop. Type your note below instead.</p>';
 
   var hasRed = _ciState.symptoms.some(function(slug) {
     return CHECK_IN_SYMPTOMS.some(function(c) { return c.slug === slug && c.severity === 'red'; });
   });
-  var reassurance = buildReassurance(day, hasRed);
 
   setContent(
     '<div>' +
@@ -568,11 +644,13 @@ function showCheckin() {
     voiceHtml +
 
     '<div class="ci-section-label" style="margin-top:.75rem;">Text note</div>' +
-    '<textarea class="ci-note-input" id="ci-note" placeholder="Anything you want to remember from today..." oninput="_ciState.note=this.value">' + esc(_ciState.note) + '</textarea>' +
+    '<textarea class="ci-note-input" id="ci-note" ' +
+      'placeholder="Anything you want to remember from today..." ' +
+      'oninput="_ciState.note=this.value">' + esc(_ciState.note) + '</textarea>' +
 
-    reassurance +
+    buildReassurance(day, hasRed) +
 
-    '<button class="ci-save-btn" onclick="ciSave()">' +
+    '<button class="ci-save-btn" id="ci-save-btn" onclick="ciSave()">' +
       '<span class="material-symbols-outlined" style="font-size:1rem;">check_circle</span>' +
       ' Save today\'s log' +
     '</button>' +
@@ -580,31 +658,38 @@ function showCheckin() {
   );
 }
 
+// ── reassurance card ──────────────────────────────────────────
 function buildReassurance(day, hasRed) {
   if (hasRed) {
-    return '<div class="reassurance-card" id="ci-reassurance" style="background:rgba(253,121,90,.07);border-left:3px solid var(--error);">' +
-      '<div class="rc-icon"><span class="material-symbols-outlined" style="color:var(--error);">warning</span></div>' +
-      '<h3 class="rc-title">Please seek medical advice</h3>' +
-      '<p class="rc-body">You\'ve noted a symptom that needs prompt attention. Please contact your midwife, lactation consultant, or doctor today.</p>' +
-    '</div>';
+    return (
+      '<div class="reassurance-card" id="ci-reassurance" ' +
+           'style="background:rgba(253,121,90,.07);border-left:3px solid var(--error);">' +
+        '<div class="rc-icon"><span class="material-symbols-outlined" style="color:var(--error);">warning</span></div>' +
+        '<h3 class="rc-title">Please seek medical advice</h3>' +
+        '<p class="rc-body">You\'ve noted a symptom that needs prompt attention. Please contact your midwife, lactation consultant, or doctor today.</p>' +
+      '</div>'
+    );
   }
-  return '<div class="reassurance-card" id="ci-reassurance">' +
-    '<div class="rc-icon"><span class="material-symbols-outlined">favorite</span></div>' +
-    '<h3 class="rc-title">You\'re doing great, Mama.</h3>' +
-    '<p class="rc-body">Day ' + day + ' — you\'re showing up. That\'s everything. Every check-in is a step forward.</p>' +
-  '</div>';
+  return (
+    '<div class="reassurance-card" id="ci-reassurance">' +
+      '<div class="rc-icon"><span class="material-symbols-outlined">favorite</span></div>' +
+      '<h3 class="rc-title">You\'re doing great, Mama.</h3>' +
+      '<p class="rc-body">Day ' + day + ' \u2014 you\'re showing up. That\'s everything.</p>' +
+    '</div>'
+  );
 }
 
+// ── symptom toggle ────────────────────────────────────────────
 function ciToggle(el, slug) {
   var idx = _ciState.symptoms.indexOf(slug);
   if (idx > -1) {
     _ciState.symptoms.splice(idx, 1);
     el.classList.remove('checked');
-    el.setAttribute('aria-checked','false');
+    el.setAttribute('aria-checked', 'false');
   } else {
     _ciState.symptoms.push(slug);
     el.classList.add('checked');
-    el.setAttribute('aria-checked','true');
+    el.setAttribute('aria-checked', 'true');
   }
   var hasRed = _ciState.symptoms.some(function(s) {
     return CHECK_IN_SYMPTOMS.some(function(c) { return c.slug === s && c.severity === 'red'; });
@@ -613,63 +698,161 @@ function ciToggle(el, slug) {
   if (rc) rc.outerHTML = buildReassurance(getCurrentDay(), hasRed);
 }
 
+// ── mood selection (single-select) ───────────────────────────
 function ciSetMood(key, btn) {
   _ciState.mood = key;
   btn.closest('.mood-row').querySelectorAll('.mood-btn').forEach(function(b) { b.classList.remove('selected'); });
   btn.classList.add('selected');
 }
 
+// ── voice state switcher ──────────────────────────────────────
+function _ciVoiceSetState(state) {
+  var idle = document.getElementById('ci-vs-idle');
+  var rec  = document.getElementById('ci-vs-recording');
+  var done = document.getElementById('ci-vs-recorded');
+  if (idle) idle.style.display = state === 'idle'      ? '' : 'none';
+  if (rec)  rec.style.display  = state === 'recording' ? '' : 'none';
+  if (done) done.style.display = state === 'recorded'  ? '' : 'none';
+}
+
+// ── recording timer ───────────────────────────────────────────
+function _ciStartTimer() {
+  _ciStopTimer();
+  _voiceSeconds = 0;
+  _voiceTimer = setInterval(function() {
+    _voiceSeconds++;
+    var el = document.getElementById('ci-rec-timer');
+    if (el) {
+      var m = Math.floor(_voiceSeconds / 60);
+      var s = _voiceSeconds % 60;
+      el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    }
+    // Hard cap at 60 s — keeps Storage costs low
+    if (_voiceSeconds >= 60) {
+      if (voiceRec) voiceRec.stop();
+      _ciStopTimer();
+      _ciVoiceSetState('recorded');
+      showToast('Voice note capped at 60 seconds.');
+    }
+  }, 1000);
+}
+function _ciStopTimer() {
+  if (_voiceTimer) { clearInterval(_voiceTimer); _voiceTimer = null; }
+}
+
+// ── ciToggleVoice — start or stop recording ───────────────────
 function ciToggleVoice() {
   if (!voiceRec) {
     voiceRec = new VoiceRecorder({
       onTranscript: function(text) {
         var box = document.getElementById('ci-transcript');
-        if (box) { box.textContent = text; box.classList.add('interim'); }
+        if (box) { box.textContent = text; box.style.display = ''; box.classList.add('interim'); }
       },
       onFinal: function(text) {
         _ciState.voiceText = (_ciState.voiceText ? _ciState.voiceText + ' ' : '') + text;
         var box = document.getElementById('ci-transcript');
-        if (box) { box.textContent = _ciState.voiceText; box.classList.remove('interim'); }
+        if (box) { box.textContent = _ciState.voiceText; box.style.display = ''; box.classList.remove('interim'); }
       },
-      onAudioBlob: function(blob) { _voiceBlob = blob; },
-      onError: function(msg) { showToast(msg); ciVoiceStop(); },
+      onAudioBlob: function(blob) {
+        _voiceBlob = blob;
+        if (_voiceAudioUrl) URL.revokeObjectURL(_voiceAudioUrl);
+        _voiceAudioUrl = URL.createObjectURL(blob);
+        var audio = document.getElementById('ci-voice-audio');
+        if (audio) audio.src = _voiceAudioUrl;
+      },
+      onError: function(msg) {
+        showToast(msg);
+        _ciStopTimer();
+        _ciVoiceSetState('idle');
+      },
     });
   }
 
   if (voiceRec.isRecording) {
     voiceRec.stop();
-    ciVoiceStop();
+    _ciStopTimer();
+    _ciVoiceSetState('recorded');
   } else {
     voiceRec.start().then(function() {
-      var btn    = document.getElementById('ci-mic-btn');
-      var icon   = document.getElementById('ci-mic-icon');
-      var status = document.getElementById('ci-voice-status');
-      if (btn)    btn.classList.add('recording');
-      if (icon)   icon.textContent = 'stop';
-      if (status) status.style.display = '';
+      _ciStartTimer();
+      _ciVoiceSetState('recording');
     }).catch(function() {
       showToast('Microphone access denied. Please allow mic in browser settings.');
     });
   }
 }
 
-function ciVoiceStop() {
-  var btn    = document.getElementById('ci-mic-btn');
-  var icon   = document.getElementById('ci-mic-icon');
-  var status = document.getElementById('ci-voice-status');
-  if (btn)    btn.classList.remove('recording');
-  if (icon)   icon.textContent = 'mic';
-  if (status) status.style.display = 'none';
+// ── ciPlayVoice — play / pause recorded audio ─────────────────
+function ciPlayVoice() {
+  var audio = document.getElementById('ci-voice-audio');
+  var icon  = document.getElementById('ci-play-icon');
+  var label = document.getElementById('ci-play-label');
+  if (!audio || !audio.src) { showToast('No recording to play.'); return; }
+
+  if (audio.paused) {
+    audio.play().then(function() {
+      if (icon)  icon.textContent  = 'pause';
+      if (label) label.textContent = 'Pause';
+      audio.onended = function() {
+        if (icon)  icon.textContent  = 'play_arrow';
+        if (label) label.textContent = 'Play';
+      };
+    }).catch(function() {
+      showToast('Playback requires HTTPS or localhost.');
+    });
+  } else {
+    audio.pause();
+    if (icon)  icon.textContent  = 'play_arrow';
+    if (label) label.textContent = 'Play';
+  }
 }
 
-function ciSave() {
+// ── ciDeleteVoice — discard recording and reset to idle ───────
+function ciDeleteVoice() {
+  var audio = document.getElementById('ci-voice-audio');
+  if (audio) { audio.pause(); audio.src = ''; }
+  if (_voiceAudioUrl) { URL.revokeObjectURL(_voiceAudioUrl); _voiceAudioUrl = null; }
+  _voiceBlob         = null;
+  _ciState.voiceText = '';
+  if (voiceRec) { try { voiceRec.stop(); } catch(e) {} voiceRec = null; }
+  var box = document.getElementById('ci-transcript');
+  if (box) { box.textContent = ''; box.style.display = 'none'; }
+  _ciVoiceSetState('idle');
+}
+
+// ── ciReRecord — delete current recording then immediately record again
+function ciReRecord() {
+  ciDeleteVoice();
+  // Short delay so MediaRecorder fully releases the mic before we re-acquire it
+  setTimeout(ciToggleVoice, 150);
+}
+
+// ── ciSave — validate → save localStorage → save Supabase ─────
+async function ciSave() {
   var textarea = document.getElementById('ci-note');
   if (textarea) _ciState.note = textarea.value;
+
+  // Validate: mood is required
+  if (!_ciState.mood) {
+    showToast('Please select your mood before saving. \uD83D\uDE4F');
+    return;
+  }
+
+  // Disable save button + show spinner
+  var saveBtn = document.getElementById('ci-save-btn');
+  if (saveBtn) {
+    saveBtn.disabled = true;
+    saveBtn.innerHTML =
+      '<span class="material-symbols-outlined" ' +
+           'style="font-size:1rem;animation:spin 1s linear infinite;vertical-align:middle;">refresh</span>' +
+      ' Saving\u2026';
+  }
 
   var today = getTodayISO();
   var day   = getCurrentDay();
 
-  var record = {
+  // Always persist to localStorage first (instant, offline-safe)
+  var localRecord = {
     date:             today,
     day:              day,
     symptoms:         _ciState.symptoms.slice(),
@@ -678,20 +861,41 @@ function ciSave() {
     voice_transcript: _ciState.voiceText,
     saved_at:         new Date().toISOString(),
   };
+  DB.saveCheckin(today, localRecord);
 
-  if (_voiceBlob) {
-    var reader = new FileReader();
-    reader.onloadend = function() {
-      record.voice_b64 = reader.result;
-      DB.saveCheckin(today, record);
-    };
-    reader.readAsDataURL(_voiceBlob);
-  } else {
-    DB.saveCheckin(today, record);
+  // Save to Supabase
+  if (window._supabaseClient) {
+    try {
+      await CheckinService.save(
+        {
+          date:      today,
+          mood:      _ciState.mood,
+          note:      _ciState.note,
+          voiceText: _ciState.voiceText,
+          symptoms:  _ciState.symptoms.slice(),
+        },
+        _voiceBlob   // null if no recording this session
+      );
+    } catch (err) {
+      // Supabase failed — local save already succeeded, warn and continue
+      console.error('Supabase checkin save failed:', err);
+      if (saveBtn) {
+        saveBtn.disabled = false;
+        saveBtn.innerHTML =
+          '<span class="material-symbols-outlined" style="font-size:1rem;">check_circle</span>' +
+          ' Save today\'s log';
+      }
+      showToast('Saved locally. Cloud sync failed \u2014 will retry on next save.');
+      setTimeout(function() { navigate('#home'); }, 2200);
+      return;
+    }
   }
 
+  // Clean up blob resources
   _voiceBlob = null;
-  showToast('Check-in saved! Great work today.');
+  if (_voiceAudioUrl) { URL.revokeObjectURL(_voiceAudioUrl); _voiceAudioUrl = null; }
+
+  showToast('Check-in saved! Great work today. \u2728');
   setTimeout(function() { navigate('#home'); }, 1200);
 }
 

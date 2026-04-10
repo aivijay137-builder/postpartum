@@ -1985,16 +1985,71 @@ a, button {
 /* Mood selector */
 .mood-row { display: flex; gap: .5rem; margin-bottom: .5rem; }
 .mood-btn {
-  flex: 1; padding: .625rem .25rem;
-  border-radius: .75rem; border: 1.5px solid var(--surface-high);
-  background: var(--surface-white);
-  cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: .25rem;
-  transition: all .2s;
+  flex: 1;
+  padding: .625rem .25rem .5rem;
+  border-radius: .875rem;
+  border: 2px solid transparent;
+  background: var(--surface-container);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .25rem;
+  position: relative;
+  transition: transform .15s, background .15s, border-color .15s, box-shadow .15s;
 }
-.mood-btn.selected { border-color: var(--primary); background: rgba(198,237,191,.12); }
-.mood-emoji { font-size: 1.375rem; }
-.mood-label { font-size: .5rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--on-surface-var); }
-.mood-btn.selected .mood-label { color: var(--primary); }
+.mood-btn:active { transform: scale(.93); }
+
+/* Selected — solid tonal fill + lifted shadow + scale up */
+.mood-btn.selected {
+  background: var(--primary-container);
+  border-color: var(--primary);
+  box-shadow: 0 4px 14px rgba(70,103,67,.22);
+  transform: scale(1.08);
+}
+
+/* Emoji grows when selected */
+.mood-emoji {
+  font-size: 1.5rem;
+  line-height: 1;
+  display: block;
+  transition: transform .2s;
+}
+.mood-btn.selected .mood-emoji {
+  transform: scale(1.28);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.18));
+}
+
+/* Label */
+.mood-label {
+  font-size: .5rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--on-surface-var);
+  transition: color .15s;
+}
+.mood-btn.selected .mood-label { color: var(--primary); font-weight: 800; }
+
+/* Green tick badge — pops in on selection */
+.mood-btn::after {
+  content: '';
+  position: absolute;
+  top: -.3rem;
+  right: -.3rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: var(--primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  background-size: .6rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity .15s, transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+.mood-btn.selected::after { opacity: 1; transform: scale(1); }
 
 /* Voice recorder */
 .voice-row { display: flex; align-items: flex-start; gap: .75rem; margin-bottom: .5rem; }
@@ -2489,3 +2544,110 @@ a, button {
   }
   .quick-grid { grid-template-columns: repeat(4, 1fr); }
 }
+
+
+/* ──────────────────────────────────────────────────────────────
+   VOICE NOTE — three-state UI  (idle / recording / recorded)
+   ──────────────────────────────────────────────────────────── */
+
+.voice-section { margin-bottom: .5rem; }
+
+/* Each state is a flex row */
+.voice-state {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  margin-bottom: .375rem;
+}
+.voice-hint {
+  font-size: .8125rem;
+  color: var(--on-surface-var);
+}
+
+/* Recording indicator */
+.voice-recording-info {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.voice-rec-dot {
+  width: .5rem;
+  height: .5rem;
+  border-radius: 50%;
+  background: var(--error);
+  animation: voice-pulse 1s ease-in-out infinite;
+}
+@keyframes voice-pulse {
+  0%, 100% { opacity: 1; transform: scale(1);   }
+  50%       { opacity: .4; transform: scale(.75); }
+}
+.voice-rec-label {
+  font-size: .6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--error);
+}
+.voice-rec-timer {
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+  min-width: 2.25rem;
+}
+
+/* Recorded state — wrap controls on narrow screens */
+.voice-state--recorded {
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+/* Play / pause button */
+.voice-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  padding: .4375rem .875rem;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  border: none;
+  border-radius: 2rem;
+  font-size: .8125rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.voice-play-btn:hover { opacity: .85; }
+.voice-play-btn .material-symbols-outlined { font-size: 1rem; }
+
+/* Delete button */
+.voice-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: .4375rem .625rem;
+  background: var(--error-container);
+  color: var(--error);
+  border: none;
+  border-radius: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.voice-delete-btn:hover { opacity: .85; }
+
+/* Re-record link-style button */
+.voice-rerecord-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  padding: .4375rem .75rem;
+  background: none;
+  color: var(--primary);
+  border: 1.5px solid var(--primary-container);
+  border-radius: 2rem;
+  font-size: .8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s;
+}
+.voice-rerecord-btn:hover { background: rgba(70,103,67,.06); }
