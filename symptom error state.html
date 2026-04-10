@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Digital Sanctuary - Connection Error</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#fff7f6",
+                    "on-tertiary-container": "#5d632f",
+                    "inverse-surface": "#0d0f0d",
+                    "secondary": "#7d554f",
+                    "outline": "#797c76",
+                    "on-tertiary-fixed": "#4b501f",
+                    "on-primary": "#eaffe3",
+                    "surface-container-highest": "#e1e3dd",
+                    "background": "#faf9f5",
+                    "on-surface": "#30332f",
+                    "on-surface-variant": "#5d605b",
+                    "primary": "#466743",
+                    "inverse-on-surface": "#9d9d9a",
+                    "secondary-dim": "#704943",
+                    "on-secondary": "#fff7f6",
+                    "on-primary-container": "#395937",
+                    "error": "#a73b21",
+                    "on-primary-fixed": "#274626",
+                    "error-dim": "#791903",
+                    "on-tertiary": "#f8febc",
+                    "on-secondary-fixed": "#593630",
+                    "secondary-container": "#ffdad4",
+                    "surface-bright": "#faf9f5",
+                    "tertiary": "#5d632f",
+                    "primary-fixed-dim": "#b9dfb2",
+                    "on-background": "#30332f",
+                    "surface-variant": "#e1e3dd",
+                    "surface": "#faf9f5",
+                    "primary-dim": "#3a5b38",
+                    "on-secondary-fixed-variant": "#79524b",
+                    "primary-fixed": "#c6edbf",
+                    "tertiary-fixed-dim": "#eaf0af",
+                    "secondary-fixed": "#ffdad4",
+                    "on-error-container": "#6e1400",
+                    "tertiary-container": "#f8ffbc",
+                    "tertiary-fixed": "#f8ffbc",
+                    "outline-variant": "#b0b3ad",
+                    "surface-tint": "#466743",
+                    "on-tertiary-fixed-variant": "#676e39",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#6e4842",
+                    "surface-container": "#eeeee9",
+                    "primary-container": "#c6edbf",
+                    "surface-container-high": "#e8e9e3",
+                    "secondary-fixed-dim": "#fdc8c0",
+                    "on-primary-fixed-variant": "#426340",
+                    "error-container": "#fd795a",
+                    "inverse-primary": "#ccf3c5",
+                    "tertiary-dim": "#515724",
+                    "surface-dim": "#d9dbd5",
+                    "surface-container-low": "#f4f4ef"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3 { font-family: 'Noto Serif', serif; }
+        .glass-header {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface selection:bg-primary-container min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-md flex justify-between items-center px-6 h-16 w-full no-border tonal-layering">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="portrait of a gentle woman with a kind smile in warm natural light, soft focus background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR5vvoB5em_Mp6BlWhnzOuEVOWmE-yki5AzP84v1O5iTmYtFMFnIUss9obvtr5OkLQSc8f3d6yHiyxu571s7qi8TkSFd5jTpu1z4ie6N5RPgDdhfPkP6agYZilK1kOFwB5ZQgXd7UAt6WAGjVQVXukw3-lBG55MdixYlLqypzDe_qOm6t9VLXO_0cIp4oidR-QxFJqv3UySeYnEMQ6fkhkA0gksVJtjlQXKzkAbsB2tr8h4Ly6XMdXwmG3wgzPTbEHxcehg6t5f0aN"/>
+</div>
+<span class="font-serif text-xl font-medium text-emerald-800 dark:text-emerald-300">Digital Sanctuary</span>
+</div>
+<button class="material-symbols-outlined text-stone-500 dark:text-stone-400 hover:opacity-80 transition-opacity">settings</button>
+</header>
+<!-- Main Content: Error State -->
+<main class="flex-grow flex flex-col items-center justify-center px-8 text-center pt-20 pb-32">
+<!-- Error Illustration/Icon Container -->
+<div class="relative mb-12">
+<!-- Decorative atmospheric glows -->
+<div class="absolute -inset-10 bg-secondary-container/20 blur-3xl rounded-full"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-24 h-24 rounded-full bg-surface-container-low border border-outline-variant/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-5xl" style="font-variation-settings: 'wght' 300;">cloud_off</span>
+</div>
+</div>
+<!-- Organic shape backdrops -->
+<svg class="w-48 h-48 text-surface-container-high/40" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M45.7,-77.6C58.1,-69.5,66.4,-54.6,73.4,-39.8C80.4,-25.1,86.1,-10.5,85.6,3.9C85,18.3,78.2,32.5,69.5,45.3C60.8,58.1,50.1,69.5,37.3,75.8C24.4,82.1,9.4,83.4,-5,82.4C-19.4,81.4,-33.1,78.1,-46.3,71.5C-59.5,64.9,-72.1,55,-79.1,42.2C-86.2,29.4,-87.7,13.7,-85.4,-1.3C-83.1,-16.3,-77,-30.6,-68.2,-43.3C-59.4,-56,-47.9,-67.2,-34.5,-74.6C-21,-82,-10.5,-85.7,2.5,-90C15.4,-94.3,33.3,-85.8,45.7,-77.6Z" fill="currentColor" transform="translate(100 100)"></path>
+</svg>
+</div>
+<div class="max-w-md mx-auto">
+<h1 class="text-3xl md:text-4xl text-on-surface mb-6 font-semibold leading-tight">We couldn’t load symptom cards right now.</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed mb-12">Please check your connection or try again in a moment.</p>
+<div class="flex flex-col gap-6 items-center">
+<!-- Primary Button -->
+<button class="group relative w-full sm:w-64 h-14 bg-gradient-to-r from-primary to-primary-dim text-on-primary rounded-full font-semibold shadow-[0_12px_24px_rgba(70,103,67,0.15)] hover:shadow-[0_16px_32px_rgba(70,103,67,0.2)] transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-xl group-hover:rotate-45 transition-transform">refresh</span>
+                    Try again
+                </button>
+<!-- Secondary Link -->
+<button class="text-primary font-bold px-8 py-3 rounded-full hover:bg-primary-container/30 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+                    Back to home
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center pt-3 pb-6 px-4 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-md z-50 rounded-t-3xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] no-border bg-stone-100 dark:bg-stone-800">
+<!-- Symptoms (Active) -->
+<a class="flex flex-col items-center justify-center bg-emerald-100 dark:bg-emerald-900/30 text-emerald-900 dark:text-emerald-100 rounded-full px-5 py-2 scale-95 duration-300 ease-in-out font-sans text-xs font-medium tracking-wide" href="#">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">health_metrics</span>
+<span>Symptoms</span>
+</a>
+<!-- Positions -->
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-2 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 duration-300 font-sans text-xs font-medium tracking-wide" href="#">
+<span class="material-symbols-outlined">self_care</span>
+<span>Positions</span>
+</a>
+<!-- More -->
+<a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 px-5 py-2 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 duration-300 font-sans text-xs font-medium tracking-wide" href="#">
+<span class="material-symbols-outlined">more_horiz</span>
+<span>More</span>
+</a>
+</nav>
+<!-- Floating Background Elements (Digital Sanctuary Aesthetic) -->
+<div class="fixed top-[20%] -left-20 w-80 h-80 bg-primary-container/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+<div class="fixed bottom-[10%] -right-20 w-96 h-96 bg-secondary-container/15 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+</body></html>

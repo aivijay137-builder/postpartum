@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Symptom Detail - Engorgement</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-background": "#30332f",
+                      "primary-fixed": "#c6edbf",
+                      "surface": "#faf9f5",
+                      "secondary-dim": "#704943",
+                      "inverse-surface": "#0d0f0d",
+                      "background": "#faf9f5",
+                      "on-tertiary-fixed-variant": "#676e39",
+                      "primary-dim": "#3a5b38",
+                      "outline-variant": "#b0b3ad",
+                      "surface-tint": "#466743",
+                      "surface-container-high": "#e8e9e3",
+                      "surface-variant": "#e1e3dd",
+                      "surface-dim": "#d9dbd5",
+                      "secondary": "#7d554f",
+                      "surface-bright": "#faf9f5",
+                      "on-secondary-fixed-variant": "#79524b",
+                      "on-secondary-container": "#6e4842",
+                      "on-primary-fixed-variant": "#426340",
+                      "on-surface": "#30332f",
+                      "inverse-primary": "#ccf3c5",
+                      "secondary-fixed": "#ffdad4",
+                      "on-primary-container": "#395937",
+                      "inverse-on-surface": "#9d9d9a",
+                      "tertiary-container": "#f8ffbc",
+                      "secondary-container": "#ffdad4",
+                      "on-tertiary-fixed": "#4b501f",
+                      "tertiary-fixed": "#f8ffbc",
+                      "on-surface-variant": "#5d605b",
+                      "on-primary-fixed": "#274626",
+                      "tertiary": "#5d632f",
+                      "tertiary-fixed-dim": "#eaf0af",
+                      "surface-container-highest": "#e1e3dd",
+                      "outline": "#797c76",
+                      "surface-container": "#eeeee9",
+                      "on-error-container": "#6e1400",
+                      "secondary-fixed-dim": "#fdc8c0",
+                      "on-tertiary-container": "#5d632f",
+                      "on-primary": "#eaffe3",
+                      "surface-container-low": "#f4f4ef",
+                      "error-container": "#fd795a",
+                      "primary-fixed-dim": "#b9dfb2",
+                      "on-secondary-fixed": "#593630",
+                      "on-tertiary": "#f8febc",
+                      "primary-container": "#c6edbf",
+                      "tertiary-dim": "#515724",
+                      "error": "#a73b21",
+                      "primary": "#466743",
+                      "error-dim": "#791903",
+                      "on-secondary": "#fff7f6",
+                      "surface-container-lowest": "#ffffff",
+                      "on-error": "#fff7f6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Noto Serif"],
+                      "body": ["Plus Jakarta Sans"],
+                      "label": ["Plus Jakarta Sans"]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3 { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface selection:bg-primary-container">
+<!-- Top Navigation Anchor (Manual suppression of global nav as this is a detail screen) -->
+<header class="fixed top-0 w-full bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-md z-50">
+<div class="flex items-center px-6 h-16 w-full max-w-md mx-auto">
+<button class="flex items-center gap-2 text-emerald-800 dark:text-emerald-200 font-noto-serif text-lg font-medium hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+<span>Symptoms</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-32 px-6 max-w-md mx-auto space-y-8">
+<!-- Severity & Category -->
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-[#FDE68A] text-[#92400E] text-xs font-semibold rounded-full uppercase tracking-wider">Attention Needed</span>
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant text-xs font-medium rounded-full">Breast</span>
+</div>
+<!-- Title Section -->
+<section class="space-y-2">
+<h1 class="text-3xl font-bold leading-tight text-on-background">My breasts are rock hard and painful</h1>
+<p class="text-primary font-medium tracking-wide flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="clinical_notes">clinical_notes</span>
+                Clinical: Engorgement
+            </p>
+</section>
+<!-- Asymmetric Intro Card -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low p-6">
+<div class="absolute -top-4 -right-4 w-24 h-24 bg-primary-container/30 rounded-full blur-2xl"></div>
+<div class="relative space-y-4">
+<h3 class="text-lg font-semibold text-primary-dim">What this likely is</h3>
+<div class="space-y-3 text-on-surface-variant leading-relaxed">
+<p>Breast engorgement is the painful overfullness of the breasts. It occurs when milk, blood flow, and lymphatic fluids increase in the breast tissue.</p>
+<p>This is extremely common in the first few days postpartum as your body transitions from colostrum to mature milk production.</p>
+</div>
+</div>
+</div>
+<!-- Relief Steps - The "Soulful" Gradient Signature -->
+<section class="space-y-6">
+<div class="flex items-center gap-3">
+<div class="h-px flex-1 bg-outline-variant/20"></div>
+<h3 class="text-xl font-semibold">Immediate relief steps</h3>
+<div class="h-px flex-1 bg-outline-variant/20"></div>
+</div>
+<div class="space-y-4">
+<div class="flex gap-4 p-5 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-primary font-bold">1</div>
+<div class="space-y-1">
+<p class="font-bold text-on-background">Warm compress before feed</p>
+<p class="text-sm text-on-surface-variant">Apply for 5 mins to help dilate ducts and encourage milk flow.</p>
+</div>
+</div>
+<div class="flex gap-4 p-5 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-primary font-bold">2</div>
+<div class="space-y-1">
+<p class="font-bold text-on-background">Gentle massage</p>
+<p class="text-sm text-on-surface-variant">Use light, circular strokes towards the nipple area while nursing or pumping.</p>
+</div>
+</div>
+<div class="flex gap-4 p-5 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="flex-shrink-0 w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-primary font-bold">3</div>
+<div class="space-y-1">
+<p class="font-bold text-on-background">Frequent feeding</p>
+<p class="text-sm text-on-surface-variant">Don't wait for hunger cues; aim to drain the breast every 2-3 hours.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Do's and Don'ts Bento Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-primary-container/20 p-5 rounded-xl space-y-3">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+<span class="font-bold text-sm">Do's</span>
+</div>
+<ul class="text-xs space-y-3 text-on-surface-variant font-medium">
+<li>• Hand express for comfort</li>
+<li>• Use cold packs after feeds</li>
+<li>• Wear a supportive bra</li>
+</ul>
+</div>
+<div class="bg-secondary-container/30 p-5 rounded-xl space-y-3">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+<span class="font-bold text-sm">Don'ts</span>
+</div>
+<ul class="text-xs space-y-3 text-on-surface-variant font-medium">
+<li>• Limit fluid intake</li>
+<li>• Skip night feeds</li>
+<li>• Use tight underwire bras</li>
+</ul>
+</div>
+</div>
+<!-- Red Flags Callout - Tonal Layering -->
+<div class="bg-error-container/10 border-l-4 border-error p-6 rounded-xl space-y-4">
+<div class="flex items-center gap-2 text-error font-bold">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+<h3>Red flags - see a doctor if...</h3>
+</div>
+<ul class="space-y-3 text-sm text-on-surface leading-snug">
+<li class="flex gap-3">
+<span class="w-1.5 h-1.5 rounded-full bg-error mt-1.5 shrink-0"></span>
+                    High fever over 101.3F
+                </li>
+<li class="flex gap-3">
+<span class="w-1.5 h-1.5 rounded-full bg-error mt-1.5 shrink-0"></span>
+                    Red streaks appearing on breast tissue
+                </li>
+<li class="flex gap-3">
+<span class="w-1.5 h-1.5 rounded-full bg-error mt-1.5 shrink-0"></span>
+                    Flu-like symptoms (chills, sudden aches)
+                </li>
+</ul>
+</div>
+<!-- Improvement Expectation -->
+<div class="text-center space-y-3 px-4">
+<span class="material-symbols-outlined text-secondary-dim opacity-40 text-4xl" data-icon="hourglass_empty">hourglass_empty</span>
+<h4 class="text-lg font-semibold text-on-background">When to expect improvement</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+                With consistent management and frequent milk removal, engorgement usually resolves within <span class="text-primary-dim font-bold">24-48 hours</span>. Your milk supply will soon regulate to meet your baby's needs.
+            </p>
+</div>
+<!-- Illustration -->
+<div class="w-full h-48 rounded-xl overflow-hidden grayscale-[20%] opacity-90">
+<img alt="Soft focus of a peaceful nursery interior with natural morning light and gentle fabrics" class="w-full h-full object-cover" data-alt="soft warm aesthetic interior of a nursery with linen fabrics and a wooden crib in gentle morning sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1CF5P7qk1J0uxL6ula-c9pgh9L4mupCK1S4e8f7uKaHsGg92rKnP2Lj5zhJ8VH_BvivAICExwClv8s6a6R2_LMZ2AmBs_mkW4oXqqe9DOExB1OO30ZA7A33XS5CDb5176eD4D__2lPKGn2xQm72mFZGL0y-vI7ffqo88qz84avNspH0Vks3Mw5_LBAqa1zS1ClBYC9DoItfT2n_s3pFn9Ez_ws0MPtT-u5F3KnJgFV4H5siuiDYoRnD5bXcp4nxXB6SlO37OCR2yl"/>
+</div>
+<!-- Medical Disclaimer -->
+<footer class="pb-12 text-center">
+<p class="text-[10px] leading-relaxed text-outline uppercase tracking-widest font-bold">
+                Medical Disclaimer
+            </p>
+<p class="text-[10px] leading-relaxed text-outline/70 mt-2 px-8 italic">
+                This information is for educational purposes and does not replace professional medical advice. Always consult your healthcare provider or a lactation specialist for personalized care.
+            </p>
+</footer>
+</main>
+<!-- Contextual FAB Suppression: Hide FAB as per rules for Details screens -->
+<!-- Navigation Pivot Logic: Suppress BottomNavBar for focused sub-pages/task-focused screens -->
+<!-- The user is in a "focused journey" (symptom detail), so the navigation shell is excluded to prioritize the Content Canvas. -->
+</body></html>

@@ -1,0 +1,1529 @@
+[
+  {
+    "id": 1,
+    "slug": "engorgement",
+    "title_user": "My breasts are rock hard and painful",
+    "title_clinical": "Engorgement",
+    "severity": "yellow",
+    "category": "breast",
+    "tags": ["day-3-5", "pain", "swelling", "breast"],
+    "peak_timing": "Most common around day 3–5 after birth when mature milk comes in.",
+    "what_it_is": "Engorgement happens when your breasts suddenly fill with more milk and fluid than your baby is removing. The breasts can feel hard, hot, and very full. It is uncomfortable but usually temporary as feeding patterns settle.",
+    "body_signals": [
+      "Breasts feel very full, firm, or rock hard",
+      "Skin looks shiny or stretched",
+      "Mild warmth or aching in the breasts"
+    ],
+    "baby_signals": [
+      "Baby struggles to latch onto very firm breast",
+      "Baby may slip off the nipple frequently",
+      "Baby appears frustrated at the breast"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Soften the areola before feeds",
+        "description": "Apply a warm compress for a few minutes, then gently hand-express a small amount of milk until the area around the nipple feels softer so baby can latch more easily."
+      },
+      {
+        "order": 2,
+        "title": "Feed frequently on demand",
+        "description": "Offer the breast often, at least every 2–3 hours, to help remove milk and relieve fullness."
+      },
+      {
+        "order": 3,
+        "title": "Use cold packs after feeds",
+        "description": "Apply a cold pack or chilled cabbage leaves over a thin cloth for 10–15 minutes after feeds to reduce swelling and discomfort."
+      }
+    ],
+    "dos": [
+      "Do feed your baby often, even if feeds are shorter",
+      "Do use gentle hand expression if baby cannot latch",
+      "Do wear a supportive but not tight bra"
+    ],
+    "donts": [
+      "Do not suddenly stop breastfeeding",
+      "Do not bind your breasts tightly",
+      "Do not apply strong, direct pressure to painful areas"
+    ],
+    "when_to_expect_improvement": "With frequent effective feeds and comfort measures, engorgement usually improves noticeably within 24–48 hours.",
+    "red_flags": [
+      "Fever above 38 °C",
+      "One area of the breast becomes very red, hot, and tender",
+      "Flu-like body aches and chills"
+    ],
+    "recommended_action_if_red_flags": "If you develop fever or a hot, red, very painful area on the breast, contact your doctor or local emergency service as soon as possible.",
+    "disclaimer": "This information is for general education only and is not a substitute for professional medical care. If you are worried, seek help from a qualified health professional.",
+    "related_slugs": ["blocked-duct", "mastitis-symptoms", "night-time-engorgement"],
+    "best_for_profiles": ["first-time-mom"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Classic day 3–5 engorgement scenario."
+  },
+  {
+    "id": 2,
+    "slug": "cracked-nipples",
+    "title_user": "My nipples are cracked and very sore",
+    "title_clinical": "Cracked nipples",
+    "severity": "yellow",
+    "category": "nipple",
+    "tags": ["pain", "nipple-damage", "early-days"],
+    "peak_timing": "Often appears in the first 1–2 weeks when latch and positioning are still being learned.",
+    "what_it_is": "Cracked nipples usually mean the nipple is rubbing or being pinched during feeds, most often from a shallow latch or awkward position. They can be very sore but almost always improve once the latch is corrected.",
+    "body_signals": [
+      "Visible cracks or scabs on the nipple surface",
+      "Burning or stinging pain during and after feeds",
+      "Occasional small spots of blood on breast pads"
+    ],
+    "baby_signals": [
+      "Baby latched on only to the nipple tip instead of a deep mouthful of breast",
+      "Clicking sounds during feeding",
+      "Baby slipping on and off the breast"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Break latch and reattach deeply",
+        "description": "If a feed is painful, gently insert a clean finger into the corner of baby's mouth to break the suction and try again with a deeper latch."
+      },
+      {
+        "order": 2,
+        "title": "Use a comfortable position",
+        "description": "Experiment with positions like laid-back or side-lying that reduce pressure on damaged areas while keeping baby close and supported."
+      },
+      {
+        "order": 3,
+        "title": "Support healing between feeds",
+        "description": "Express a few drops of breastmilk and dab onto the nipple, then let it air-dry. Use a breathable breast pad and avoid harsh soaps."
+      }
+    ],
+    "dos": [
+      "Do seek latch help from a lactation professional if pain continues",
+      "Do start feeds on the less sore side if possible",
+      "Do keep nipples dry between feeds"
+    ],
+    "donts": [
+      "Do not pull baby off the breast without breaking suction",
+      "Do not scrub nipples with cloths or soap",
+      "Do not ignore persistent pain that makes you dread feeds"
+    ],
+    "when_to_expect_improvement": "With a better latch and gentle care, many mothers notice less pain within a few days and visible healing within 1–2 weeks.",
+    "red_flags": [
+      "Sharp, burning nipple pain that worsens after weeks of painless feeds",
+      "Shiny or flaky skin on the nipple and areola",
+      "Deep breast pain that continues between feeds"
+    ],
+    "recommended_action_if_red_flags": "If pain is severe, getting worse, or not improving with latch changes, contact a lactation consultant or doctor to rule out infection or other causes.",
+    "disclaimer": "This information is for general education only and is not a substitute for professional medical care.",
+    "related_slugs": ["shallow-latch-pain", "thrush-nipple", "flat-inverted-nipples"],
+    "best_for_profiles": ["first-time-mom"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Cracked nipples linked to latch issues and possible thrush."
+  },
+  {
+    "id": 3,
+    "slug": "shallow-latch-pain",
+    "title_user": "Breastfeeding hurts from the first latch",
+    "title_clinical": "Shallow latch",
+    "severity": "yellow",
+    "category": "nipple",
+    "tags": ["latch", "pain", "early-days"],
+    "peak_timing": "Common in the first days and weeks as you and baby are learning technique.",
+    "what_it_is": "A shallow latch means baby has mostly the nipple in their mouth instead of a deep mouthful of breast. This can cause significant pain and nipple damage, and may also reduce milk transfer.",
+    "body_signals": [
+      "Intense toe-curling pain at the start of each feed",
+      "Nipple comes out flattened, creased, or lipstick-shaped",
+      "Nipple skin becomes red or damaged"
+    ],
+    "baby_signals": [
+      "Baby's lips are tucked in instead of flanged out",
+      "More of the nipple than the areola is visible during feeds",
+      "Frequent clicking or slipping off the breast"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Start with a wide-open mouth",
+        "description": "Tickle baby's upper lip with your nipple and wait for a very wide yawn-like opening before bringing baby quickly and closely to the breast."
+      },
+      {
+        "order": 2,
+        "title": "Check positioning and support",
+        "description": "Keep baby's head, neck, and body in a straight line, tummy facing you, and bring baby to the breast rather than leaning forward."
+      },
+      {
+        "order": 3,
+        "title": "Relatch when pain stays high",
+        "description": "If the pain does not ease after the first few sucks, gently stop the feed and try again with a deeper latch instead of pushing through intense pain."
+      }
+    ],
+    "dos": [
+      "Do watch for flanged lips and rounded cheeks during feeds",
+      "Do seek hands-on help if you are unsure about latch",
+      "Do use laid-back or side-lying positions if they are more comfortable"
+    ],
+    "donts": [
+      "Do not ignore severe pain that makes you tense or tearful",
+      "Do not push on the back of baby's head, which can cause them to pull away",
+      "Do not assume pain is 'normal' and must be endured"
+    ],
+    "when_to_expect_improvement": "With practice and small adjustments, many mothers notice less pain over several feeds and clear improvement within a few days.",
+    "red_flags": [
+      "Nipple wounds that are worsening rather than healing",
+      "Baby seems unsatisfied after long feeds and makes few wet diapers",
+      "Baby's weight gain is poor or dropping"
+    ],
+    "recommended_action_if_red_flags": "If latch pain continues or baby's output or weight worries you, contact a lactation consultant or your baby's doctor promptly.",
+    "disclaimer": "This is general information only and does not replace individual medical advice.",
+    "related_slugs": ["cracked-nipples", "tongue-tie-concern", "flat-inverted-nipples"],
+    "best_for_profiles": ["first-time-mom"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Focus on latch correction and early pain."
+  },
+  {
+    "id": 4,
+    "slug": "mastitis-symptoms",
+    "title_user": "I have a red, painful breast and feel like I have the flu",
+    "title_clinical": "Possible mastitis",
+    "severity": "red",
+    "category": "breast",
+    "tags": ["infection", "fever", "urgent"],
+    "peak_timing": "Can occur any time milk is not draining well, often in the first weeks.",
+    "what_it_is": "Mastitis is inflammation of the breast, sometimes with infection. It often starts with a blocked area that is not draining well and can progress quickly. Early attention can prevent worsening.",
+    "body_signals": [
+      "A wedge-shaped red or hot area on one breast",
+      "Fever, chills, or flu-like body aches",
+      "Severe tenderness in a specific area of the breast"
+    ],
+    "baby_signals": [
+      "Baby may fuss or pull off on the affected side if flow feels different",
+      "Baby otherwise may feed normally"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Continue feeding or expressing",
+        "description": "Keep milk moving from the affected breast with frequent feeds or gentle pumping, starting on the sore side if you can tolerate it."
+      },
+      {
+        "order": 2,
+        "title": "Use comfort measures",
+        "description": "Apply warm compresses before feeds and cool packs after feeds. Rest as much as possible and drink fluids."
+      },
+      {
+        "order": 3,
+        "title": "Monitor symptoms closely",
+        "description": "Note the size of the red area, your temperature, and how you feel overall over the next few hours."
+      }
+    ],
+    "dos": [
+      "Do seek medical review urgently if you have fever or strong flu-like symptoms",
+      "Do continue breastfeeding unless your doctor advises otherwise",
+      "Do rest and ask for help with household tasks"
+    ],
+    "donts": [
+      "Do not stop breastfeeding abruptly",
+      "Do not ignore worsening pain, redness, or fever",
+      "Do not massage aggressively, which can increase inflammation"
+    ],
+    "when_to_expect_improvement": "With prompt treatment, many mothers feel noticeably better within 24–48 hours. If symptoms are not improving, medical review is essential.",
+    "red_flags": [
+      "Fever above 38 °C lasting more than 24 hours",
+      "Expanding red, hot, or swollen area on the breast",
+      "Feeling very unwell, dizzy, or faint"
+    ],
+    "recommended_action_if_red_flags": "Contact your doctor or emergency services immediately if you have ongoing fever, spreading redness, or feel very unwell. You may need antibiotics or further assessment.",
+    "disclaimer": "This information is not a diagnosis and does not replace urgent medical review if you are very unwell.",
+    "related_slugs": ["blocked-duct", "engorgement"],
+    "best_for_profiles": ["first-time-mom", "c-section"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Red-flag oriented mastitis card."
+  },
+  {
+    "id": 5,
+    "slug": "low-milk-supply-concern",
+    "title_user": "I'm worried my milk supply is too low",
+    "title_clinical": "Low milk supply concern",
+    "severity": "yellow",
+    "category": "breast",
+    "tags": ["supply", "anxiety", "feeding-frequency"],
+    "peak_timing": "Common in the first weeks as feeding patterns and expectations are still settling.",
+    "what_it_is": "Many mothers worry about milk supply, especially when baby wants to feed often. True low supply is less common than it feels and is best judged by baby's diapers, weight gain, and feeding effectiveness.",
+    "body_signals": [
+      "Breasts may feel softer and less full after the early days",
+      "Letdown sensation may be mild or not felt",
+      "Pumping output may be lower than expected"
+    ],
+    "baby_signals": [
+      "Baby wants to feed frequently, especially in the evenings",
+      "Baby has periods of fussiness or cluster feeding",
+      "Wet and dirty diapers may be normal or reduced"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Check diaper counts and weight patterns",
+        "description": "Track the number of wet and dirty diapers in 24 hours and review your baby's recent weight checks to get an objective picture."
+      },
+      {
+        "order": 2,
+        "title": "Feed more often and switch sides",
+        "description": "Offer both breasts at each feed and feed on demand, including at night, to signal your body to make more milk."
+      },
+      {
+        "order": 3,
+        "title": "Protect your rest and nutrition",
+        "description": "Eat regular meals, drink to thirst, and rest whenever possible, as exhaustion and stress can make feeding feel harder."
+      }
+    ],
+    "dos": [
+      "Do speak with your baby's doctor or a lactation consultant about your concerns",
+      "Do allow frequent feeding, including cluster feeds",
+      "Do consider a weighted feed or professional assessment if available"
+    ],
+    "donts": [
+      "Do not rely on pump output alone to judge your supply",
+      "Do not introduce formula or bottles suddenly without a plan if breastfeeding is your goal",
+      "Do not ignore signs of poor weight gain or very few wet diapers"
+    ],
+    "when_to_expect_improvement": "With frequent effective feeds and support, supply usually adjusts over several days. Emotional reassurance can also make feeds feel more manageable.",
+    "red_flags": [
+      "Fewer than the expected number of wet diapers for baby's age",
+      "Baby seems very sleepy and difficult to wake for feeds",
+      "Baby's weight gain is slow or dropping"
+    ],
+    "recommended_action_if_red_flags": "If diapers are very few or weight gain worries you, contact your baby's doctor urgently for assessment and a feeding plan.",
+    "disclaimer": "This is general educational information and does not replace personalised medical or lactation advice.",
+    "related_slugs": ["cluster-feeding", "sleepy-baby-at-breast", "baby-not-gaining-weight"],
+    "best_for_profiles": ["first-time-mom"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Normalises concern while flagging true low supply signs."
+  },
+  {
+    "id": 6,
+    "slug": "cluster-feeding",
+    "title_user": "My baby wants to feed again and again all evening",
+    "title_clinical": "Cluster feeding",
+    "severity": "green",
+    "category": "baby-behaviour",
+    "tags": ["evening", "frequent-feeds", "normal-pattern"],
+    "peak_timing": "Common in the first weeks, especially in the evenings and during growth spurts.",
+    "what_it_is": "Cluster feeding is when baby wants many short feeds close together, often in the late afternoon or evening. It is usually normal and helps boost your milk supply during growth spurts.",
+    "body_signals": [
+      "Breasts may feel repeatedly used and softer by the end of the evening",
+      "You may feel tired and touched-out from frequent feeds"
+    ],
+    "baby_signals": [
+      "Baby roots and cues to feed soon after finishing a feed",
+      "Baby may be fussy or unsettled between these close-together feeds",
+      "Baby eventually has a longer stretch of sleep"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Expect and plan for the pattern",
+        "description": "Know that cluster feeding in the evening is common and often temporary. Arrange simple meals and extra help at this time if possible."
+      },
+      {
+        "order": 2,
+        "title": "Use comfortable positions",
+        "description": "Feed in a reclined or side-lying position so you can rest your body while baby feeds frequently."
+      },
+      {
+        "order": 3,
+        "title": "Share the load emotionally",
+        "description": "Ask your partner or support person to bring you water, food, or take over burping and diaper changes between feeds."
+      }
+    ],
+    "dos": [
+      "Do respond to baby's hunger cues during cluster periods",
+      "Do remind yourself this pattern is usually normal and self-limited",
+      "Do rest more at other times of the day if evenings are intense"
+    ],
+    "donts": [
+      "Do not assume cluster feeding always means low milk supply",
+      "Do not ignore your own need for food and hydration",
+      "Do not hesitate to ask for household help"
+    ],
+    "when_to_expect_improvement": "Cluster feeding often settles within a few days to weeks, especially once growth spurts pass and baby's tummy size increases.",
+    "red_flags": [
+      "Baby is constantly crying and inconsolable, not just seeking the breast",
+      "Very few wet diapers despite frequent feeds",
+      "Noisy breathing, difficulty feeding, or signs of illness"
+    ],
+    "recommended_action_if_red_flags": "If cluster feeding is accompanied by signs of illness or poor output, contact your baby's doctor for review.",
+    "disclaimer": "This card offers general reassurance and is not a substitute for medical assessment when you are worried.",
+    "related_slugs": ["low-milk-supply-concern", "baby-not-gaining-weight"],
+    "best_for_profiles": ["first-time-mom", "twins"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Normalises cluster feeding pattern."
+  },
+  {
+    "id": 7,
+    "slug": "sleepy-baby-at-breast",
+    "title_user": "My baby falls asleep at the breast after a few minutes",
+    "title_clinical": "Sleepy baby at breast",
+    "severity": "yellow",
+    "category": "baby-behaviour",
+    "tags": ["sleepy-baby", "early-weeks", "milk-transfer"],
+    "peak_timing": "Common in the first days, especially if baby is small, jaundiced, or recovering from birth.",
+    "what_it_is": "Some babies become sleepy quickly at the breast and may not take full feeds. If baby is otherwise healthy and gaining weight, this can be normal. If weight gain or diaper counts are low, it may be a concern.",
+    "body_signals": [
+      "Breasts may still feel quite full after short feeds",
+      "You may not feel a strong letdown if milk is not being removed well"
+    ],
+    "baby_signals": [
+      "Baby falls asleep within minutes of starting a feed",
+      "Baby may suck weakly with long pauses",
+      "Baby may be difficult to wake for feeds"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Use gentle wake-up techniques",
+        "description": "Undress baby to a diaper, change the diaper, or rub baby's back and feet to help them wake and stay more alert during feeds."
+      },
+      {
+        "order": 2,
+        "title": "Switch sides when sucking slows",
+        "description": "When baby starts dozing and sucking slows, compress the breast gently or switch to the other side to encourage more active drinking."
+      },
+      {
+        "order": 3,
+        "title": "Track diapers and feeding frequency",
+        "description": "Record how often baby feeds and how many wet and dirty diapers they have each day to share with your healthcare provider."
+      }
+    ],
+    "dos": [
+      "Do wake baby to feed at least as often as your healthcare provider recommends",
+      "Do seek lactation help if baby stays very sleepy at the breast",
+      "Do ask about jaundice or other medical causes if you are concerned"
+    ],
+    "donts": [
+      "Do not let long stretches of more than the recommended hours go by without a feed in the early days",
+      "Do not assume sleepiness is always harmless",
+      "Do not try strict schedules without input if weight gain is a concern"
+    ],
+    "when_to_expect_improvement": "As baby grows stronger and any early issues settle, feeds usually become longer and more alert over the first weeks.",
+    "red_flags": [
+      "Very few wet or dirty diapers for age",
+      "Baby too weak or sleepy to latch or stay on the breast",
+      "Yellowing skin or eyes spreading or deepening"
+    ],
+    "recommended_action_if_red_flags": "Contact your baby's doctor urgently if baby is very sleepy, difficult to wake, or has low output or worsening jaundice.",
+    "disclaimer": "This information is general and not a substitute for prompt evaluation of a very sleepy newborn.",
+    "related_slugs": ["baby-not-gaining-weight", "low-milk-supply-concern"],
+    "best_for_profiles": ["first-time-mom"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Focus on sleepy newborn at breast."
+  },
+  {
+    "id": 8,
+    "slug": "baby-not-gaining-weight",
+    "title_user": "I'm worried my baby isn't gaining enough weight",
+    "title_clinical": "Slow weight gain concern",
+    "severity": "red",
+    "category": "baby-behaviour",
+    "tags": ["weight", "urgent", "feeding-effectiveness"],
+    "peak_timing": "May be noticed at early check-ups in the first weeks.",
+    "what_it_is": "Slow weight gain means baby is not gaining as quickly as expected. It can have many causes including latch issues, low intake, or medical conditions and always deserves prompt attention.",
+    "body_signals": [
+      "Breasts may still feel full after feeds if milk is not well removed",
+      "You may not notice many strong letdowns"
+    ],
+    "baby_signals": [
+      "Few wet or dirty diapers for age",
+      "Sleepy, weak, or very long or very short feeds",
+      "Persistent fussiness or signs of hunger"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Arrange urgent weight check",
+        "description": "Contact your baby's doctor or clinic to arrange a weight check and feeding assessment as soon as possible."
+      },
+      {
+        "order": 2,
+        "title": "Increase supervised feeding opportunities",
+        "description": "Offer the breast more often, including at night, and ensure baby is effectively swallowing and not just comfort sucking."
+      },
+      {
+        "order": 3,
+        "title": "Record diapers and feeding details",
+        "description": "Keep a simple log of feeds, diapers, and any expressed milk or supplements to share with your healthcare provider."
+      }
+    ],
+    "dos": [
+      "Do seek professional help immediately if weight gain is poor",
+      "Do follow any feeding plan you are given, including supplements if needed",
+      "Do ask for lactation support to optimise breastfeeding"
+    ],
+    "donts": [
+      "Do not wait weeks hoping weight gain will catch up on its own",
+      "Do not stop recommended follow-up appointments",
+      "Do not feel you have failed; many factors affect weight gain"
+    ],
+    "when_to_expect_improvement": "With a clear plan and support, many babies show improved weight within days to weeks, but this should be guided and monitored by professionals.",
+    "red_flags": [
+      "Baby losing weight rather than gaining after the first days",
+      "Very few wet or dirty diapers",
+      "Baby is very sleepy, floppy, or difficult to wake"
+    ],
+    "recommended_action_if_red_flags": "Seek urgent medical care if your baby is losing weight, has very low output, or seems very unwell.",
+    "disclaimer": "This card is not a diagnosis and cannot replace urgent medical care when weight gain is a concern.",
+    "related_slugs": ["sleepy-baby-at-breast", "low-milk-supply-concern"],
+    "best_for_profiles": ["first-time-mom", "twins"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Emphasises urgency of weight concerns."
+  },
+  {
+    "id": 9,
+    "slug": "overactive-letdown",
+    "title_user": "My milk sprays and baby coughs or chokes at the start of feeds",
+    "title_clinical": "Overactive letdown",
+    "severity": "green",
+    "category": "breast",
+    "tags": ["fast-flow", "coughing", "gassy-baby"],
+    "peak_timing": "Often noticed after supply is established and letdowns are strong.",
+    "what_it_is": "An overactive letdown is when milk flows very quickly at the start of a feed. Baby may gulp, cough, or pull off, and may be gassy later. It is usually manageable with positioning and timing.",
+    "body_signals": [
+      "Strong tingling letdown sensation",
+      "Milk spraying from the nipple if baby comes off suddenly"
+    ],
+    "baby_signals": [
+      "Coughing, choking, or gulping at the start of feeds",
+      "Pulling off and crying shortly after latch",
+      "Gassy or fussy after feeds"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Use laid-back positioning",
+        "description": "Feed in a reclined position with baby on top so gravity slows the flow and baby can manage better."
+      },
+      {
+        "order": 2,
+        "title": "Let the first spray go into a cloth",
+        "description": "When you feel letdown, briefly break the latch and let the initial spray go into a cloth or container, then re-latch baby."
+      },
+      {
+        "order": 3,
+        "title": "Burp baby often",
+        "description": "Pause to burp baby if they seem uncomfortable or are gulping lots of air."
+      }
+    ],
+    "dos": [
+      "Do keep feeds calm and unhurried",
+      "Do try positions where baby's head is higher than your nipple",
+      "Do monitor baby's weight and comfort"
+    ],
+    "donts": [
+      "Do not press hard on your breast to block flow",
+      "Do not pump excessively between feeds, which can increase supply further",
+      "Do not ignore persistent choking or breathing difficulty"
+    ],
+    "when_to_expect_improvement": "As baby grows and your supply and letdown adjust, overactive letdown often becomes less intense over weeks to months.",
+    "red_flags": [
+      "Baby appears to struggle to breathe during feeds",
+      "Poor weight gain despite frequent feeds",
+      "Blue lips or pauses in breathing"
+    ],
+    "recommended_action_if_red_flags": "If baby has breathing difficulties or poor weight gain, seek medical assessment immediately.",
+    "disclaimer": "This is general information and does not replace medical care if baby has breathing or feeding problems.",
+    "related_slugs": ["gassy-baby-fussiness", "combination-feeding-confusion"],
+    "best_for_profiles": ["first-time-mom"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Focus on fast flow and positioning."
+  },
+  {
+    "id": 10,
+    "slug": "blocked-duct",
+    "title_user": "I have a tender lump in my breast",
+    "title_clinical": "Blocked duct",
+    "severity": "yellow",
+    "category": "breast",
+    "tags": ["lump", "local-pain", "drainage"],
+    "peak_timing": "Can occur any time milk is not draining well from a small area.",
+    "what_it_is": "A blocked duct is a small area in the breast where milk flow is slowed or obstructed. It can feel like a tender lump and usually improves with frequent, effective milk removal.",
+    "body_signals": [
+      "Small tender lump or firm area in one breast",
+      "Pain may increase before feeds and ease afterward",
+      "No or minimal fever"
+    ],
+    "baby_signals": [
+      "Baby may fuss if flow is slower on that side",
+      "Baby otherwise may feed normally"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Feed frequently on the affected side",
+        "description": "Offer the affected breast first so baby's strongest sucking helps clear the blockage."
+      },
+      {
+        "order": 2,
+        "title": "Gentle warmth and massage",
+        "description": "Apply warm compresses before feeds and use gentle sweeping strokes toward the nipple while feeding or expressing."
+      },
+      {
+        "order": 3,
+        "title": "Check bra and pressure points",
+        "description": "Avoid tight bras, underwires, or pressure from straps, bags, or fingers over the sore area."
+      }
+    ],
+    "dos": [
+      "Do rest and drink to thirst to support recovery",
+      "Do vary feeding positions so baby's chin points toward the blocked area",
+      "Do monitor for any signs of infection or fever"
+    ],
+    "donts": [
+      "Do not massage aggressively, which can cause more inflammation",
+      "Do not ignore increasing redness or flu-like symptoms",
+      "Do not suddenly stop breastfeeding"
+    ],
+    "when_to_expect_improvement": "Many blocked ducts improve significantly within 24–48 hours with frequent effective drainage and comfort measures.",
+    "red_flags": [
+      "Developing fever or feeling flu-like",
+      "Red, hot patch over the lump",
+      "Worsening pain instead of improvement"
+    ],
+    "recommended_action_if_red_flags": "If a blocked duct does not improve or you develop fever or a red hot area, contact your doctor promptly to rule out mastitis.",
+    "disclaimer": "This information is not a diagnosis and does not replace medical advice.",
+    "related_slugs": ["mastitis-symptoms", "engorgement"],
+    "best_for_profiles": ["first-time-mom"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Blocked duct prevention of mastitis."
+  },
+  {
+    "id": 11,
+    "slug": "nipple-bleb",
+    "title_user": "There is a small white spot on my nipple that hurts when feeding",
+    "title_clinical": "Nipple bleb",
+    "severity": "green",
+    "category": "nipple",
+    "tags": ["white-spot", "bleb", "duct-opening"],
+    "peak_timing": "Can appear any time a tiny milk duct opening is blocked.",
+    "what_it_is": "A nipple bleb is a tiny blocked milk pore that appears as a white, yellow, or clear dot on the nipple. It can cause sharp pain during feeds.",
+    "body_signals": [
+      "Small white or yellow dot on the nipple surface",
+      "Sharp, pinpoint pain during letdown or sucking"
+    ],
+    "baby_signals": [
+      "Baby may pull off due to your reaction to pain",
+      "Feeding pattern otherwise may be normal"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Use warm compresses",
+        "description": "Apply a warm, damp cloth to the nipple before feeds to help soften the area."
+      },
+      {
+        "order": 2,
+        "title": "Breastfeed or express frequently",
+        "description": "Keep milk flowing by breastfeeding or expressing often, especially on the affected side."
+      },
+      {
+        "order": 3,
+        "title": "Avoid picking at the spot",
+        "description": "Do not try to pop or cut the bleb yourself; this can cause injury or infection."
+      }
+    ],
+    "dos": [
+      "Do discuss persistent blebs with a lactation consultant or doctor",
+      "Do use comfortable positions that minimise friction at the nipple",
+      "Do keep nipples dry and avoid irritants"
+    ],
+    "donts": [
+      "Do not pick, squeeze, or lance the bleb at home",
+      "Do not use strong soaps or alcohol on nipples",
+      "Do not ignore worsening pain or signs of infection"
+    ],
+    "when_to_expect_improvement": "Some blebs resolve within a few days with warm compresses and good milk flow. Stubborn spots may need professional attention.",
+    "red_flags": [
+      "Spreading redness or swelling in the nipple or areola",
+      "Fever or flu-like feeling",
+      "Increasing pain with no improvement"
+    ],
+    "recommended_action_if_red_flags": "If pain, redness, or swelling worsens or you feel unwell, contact your healthcare provider.",
+    "disclaimer": "General educational information only; not a substitute for medical advice.",
+    "related_slugs": ["blocked-duct", "cracked-nipples"],
+    "best_for_profiles": [],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Nipple bleb guidance."
+  },
+  {
+    "id": 12,
+    "slug": "flat-inverted-nipples",
+    "title_user": "My nipples look flat or turn inward and baby can't latch",
+    "title_clinical": "Flat or inverted nipples",
+    "severity": "yellow",
+    "category": "nipple",
+    "tags": ["inverted", "latch-difficulty"],
+    "peak_timing": "Often noticed in the early days when baby first attempts to latch.",
+    "what_it_is": "Some nipples lie flat or invert when stimulated. Many babies can still breastfeed with support, especially as breasts soften and baby grows.",
+    "body_signals": [
+      "Nipple does not protrude easily with touch or cold",
+      "Nipple may pull inward when gently pressed around the areola"
+    ],
+    "baby_signals": [
+      "Baby struggles to maintain latch on the breast",
+      "Baby may slip off frequently or hold only the nipple tip"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Soften and shape the breast",
+        "description": "Use reverse pressure softening or a brief hand expression before feeds to help the nipple stand out more."
+      },
+      {
+        "order": 2,
+        "title": "Use positions with good support",
+        "description": "Try laid-back or side-lying positions and use your hand to support the breast in a way that helps baby get more tissue into the mouth."
+      },
+      {
+        "order": 3,
+        "title": "Seek skilled latch help",
+        "description": "Work with a lactation consultant who can show you techniques or tools, such as temporary use of a nipple shield if appropriate."
+      }
+    ],
+    "dos": [
+      "Do be patient as baby learns and your breast shape changes with feeding",
+      "Do ask for hands-on support early",
+      "Do monitor baby's weight and diaper counts"
+    ],
+    "donts": [
+      "Do not blame yourself; nipple shapes vary naturally",
+      "Do not use devices or suction tools without professional guidance",
+      "Do not ignore ongoing poor milk transfer"
+    ],
+    "when_to_expect_improvement": "As swelling settles and baby grows, many mothers find latching becomes easier over several days to weeks.",
+    "red_flags": [
+      "Persistent pain and poor latch despite support",
+      "Baby not gaining weight or having few wet diapers"
+    ],
+    "recommended_action_if_red_flags": "If latch remains very difficult or baby's intake is low, seek urgent lactation and medical input.",
+    "disclaimer": "General guidance only; not a substitute for personalised assessment.",
+    "related_slugs": ["shallow-latch-pain", "tongue-tie-concern"],
+    "best_for_profiles": ["first-time-mom", "c-section"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Flat/inverted nipple management."
+  },
+  {
+    "id": 13,
+    "slug": "baby-refusing-breast",
+    "title_user": "My baby suddenly refuses to latch on one or both breasts",
+    "title_clinical": "Breast refusal",
+    "severity": "yellow",
+    "category": "baby-behaviour",
+    "tags": ["breast-refusal", "strike"],
+    "peak_timing": "Can happen any time; often called a nursing strike when sudden.",
+    "what_it_is": "Breast refusal or a nursing strike is when a baby who previously fed well begins to refuse the breast. It can be due to many reasons, from pain or illness to changes in routine.",
+    "body_signals": [
+      "Fullness and discomfort if feeds are missed",
+      "Engorgement on the refused side"
+    ],
+    "baby_signals": [
+      "Turning away, arching back, or crying when offered the breast",
+      "Accepting bottle or expressed milk more easily",
+      "Otherwise behaving normally or sometimes irritable"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Rule out obvious causes",
+        "description": "Check for nasal congestion, ear pain, mouth sores, or changes in soaps or perfumes that might bother baby."
+      },
+      {
+        "order": 2,
+        "title": "Offer the breast when sleepy and calm",
+        "description": "Try feeding when baby is drowsy or just waking, in a quiet, dim environment with skin-to-skin contact."
+      },
+      {
+        "order": 3,
+        "title": "Protect your supply",
+        "description": "Express milk regularly if baby is not feeding at the breast to keep your supply and relieve fullness."
+      }
+    ],
+    "dos": [
+      "Do stay patient and calm; forcing can make refusal worse",
+      "Do keep offering lovingly and without pressure",
+      "Do consult a lactation consultant or doctor if refusal continues"
+    ],
+    "donts": [
+      "Do not force baby's head onto the breast",
+      "Do not suddenly stop breastfeeding without a plan",
+      "Do not ignore signs of illness or pain in baby"
+    ],
+    "when_to_expect_improvement": "Many nursing strikes resolve within a few days to a week with gentle persistence and addressing underlying causes.",
+    "red_flags": [
+      "Baby has signs of illness (fever, lethargy, dehydration)",
+      "Very few wet diapers while refusing the breast",
+      "Persistent refusal over several days despite support"
+    ],
+    "recommended_action_if_red_flags": "Seek medical and lactation support promptly if baby is refusing feeds and has any signs of dehydration or illness.",
+    "disclaimer": "Information only; always seek medical care if baby is not feeding well.",
+    "related_slugs": ["bottle-preference", "combination-feeding-confusion"],
+    "best_for_profiles": ["first-time-mom"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Breast refusal / nursing strike."
+  },
+  {
+    "id": 14,
+    "slug": "fast-letdown-choking",
+    "title_user": "Baby coughs or chokes every time my milk lets down",
+    "title_clinical": "Choking with fast letdown",
+    "severity": "yellow",
+    "category": "baby-behaviour",
+    "tags": ["fast-flow", "coughing"],
+    "peak_timing": "Often in the first months when supply is robust.",
+    "what_it_is": "When letdown is strong, baby may briefly choke or cough as they adjust to the fast flow. This is usually manageable but should be monitored.",
+    "body_signals": [
+      "Strong tingling or fullness at letdown",
+      "Milk sprays if baby pulls off during letdown"
+    ],
+    "baby_signals": [
+      "Coughing or pulling off at the start of the feed",
+      "Prefers one side or certain positions"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Feed in an upright or laid-back position",
+        "description": "Use gravity to slow the flow so baby has better control of swallowing."
+      },
+      {
+        "order": 2,
+        "title": "Catch the initial spray",
+        "description": "Let the first heavy spray go into a cloth, then bring baby back to the breast once the flow settles."
+      },
+      {
+        "order": 3,
+        "title": "Pause if baby is overwhelmed",
+        "description": "If baby coughs or looks distressed, gently break the latch, sit them up, and allow them to recover before offering again."
+      }
+    ],
+    "dos": [
+      "Do stay attentive to baby's breathing and comfort",
+      "Do burp baby and take brief breaks if needed",
+      "Do talk to your provider if choking is frequent or severe"
+    ],
+    "donts": [
+      "Do not ignore any signs of breathing difficulty",
+      "Do not cover baby's nose or mouth while feeding",
+      "Do not lie baby flat on their back during feeds"
+    ],
+    "when_to_expect_improvement": "As baby matures and your supply balances, choking with letdown often becomes less frequent.",
+    "red_flags": [
+      "Blue colour around lips or face during feeds",
+      "Pauses in breathing or very distressed coughing",
+      "Poor weight gain or frequent chest infections"
+    ],
+    "recommended_action_if_red_flags": "Seek urgent medical evaluation if baby shows breathing problems, colour changes, or poor weight gain.",
+    "disclaimer": "This is not a substitute for prompt medical review of any breathing concerns.",
+    "related_slugs": ["overactive-letdown", "gassy-baby-fussiness"],
+    "best_for_profiles": [],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Fast letdown causing choking."
+  },
+  {
+    "id": 15,
+    "slug": "pumping-pain",
+    "title_user": "Using the pump is painful on my nipples",
+    "title_clinical": "Painful pumping",
+    "severity": "green",
+    "category": "nipple",
+    "tags": ["pumping", "equipment", "pain"],
+    "peak_timing": "Any time pumping is started or settings are changed.",
+    "what_it_is": "Pumping should feel like firm pulling, not sharp pain. Painful pumping often means flange size, suction settings, or positioning need adjustment.",
+    "body_signals": [
+      "Nipple rubbing hard against the tunnel of the flange",
+      "Redness, swelling, or blisters after pumping"
+    ],
+    "baby_signals": [
+      "Not directly affected, but may receive expressed milk"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Check flange fit",
+        "description": "Ensure your nipple moves freely in the tunnel without excessive areola being pulled in. Consider a different size if needed."
+      },
+      {
+        "order": 2,
+        "title": "Lower suction and adjust rhythm",
+        "description": "Use the lowest suction that still expresses milk and choose a comfortable rhythm setting."
+      },
+      {
+        "order": 3,
+        "title": "Limit session length",
+        "description": "Shorten sessions or take breaks if nipples feel sore, and allow time to heal if there is visible damage."
+      }
+    ],
+    "dos": [
+      "Do read your pump's instructions carefully",
+      "Do try lubricant drops of clean breastmilk or pump-safe nipple cream if recommended",
+      "Do ask for help with fit from a lactation professional"
+    ],
+    "donts": [
+      "Do not endure severe pain during pumping",
+      "Do not use maximum suction out of the box",
+      "Do not ignore damaged skin on the nipples"
+    ],
+    "when_to_expect_improvement": "Once flange fit and settings are adjusted, pumping should become more comfortable over a few sessions.",
+    "red_flags": [
+      "Cracked, bleeding, or blistered nipples that worsen",
+      "Signs of infection such as pus, spreading redness, or fever"
+    ],
+    "recommended_action_if_red_flags": "If nipple damage is significant or not healing, see a healthcare provider.",
+    "disclaimer": "General guidance only; always follow the safety information for your specific pump.",
+    "related_slugs": ["cracked-nipples"],
+    "best_for_profiles": ["first-time-mom"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Focus on pump fit and suction."
+  },
+  {
+    "id": 16,
+    "slug": "combination-feeding-confusion",
+    "title_user": "We are using both breast and bottle and I'm feeling confused",
+    "title_clinical": "Combination feeding questions",
+    "severity": "green",
+    "category": "baby-behaviour",
+    "tags": ["combo-feeding", "bottle", "plan"],
+    "peak_timing": "Common when introducing bottles or formula alongside breastfeeding.",
+    "what_it_is": "Combination feeding means using both breast and bottle (expressed milk or formula). It can work well with a plan that protects your supply and meets baby's needs.",
+    "body_signals": [
+      "Breasts may feel fuller if feeds at the breast are reduced",
+      "Possible engorgement if changes are sudden"
+    ],
+    "baby_signals": [
+      "Preference for faster-flow bottles",
+      "Different sucking patterns at breast vs bottle"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Clarify your goals",
+        "description": "Decide what balance of breast and bottle you hope for so you and your provider can plan around it."
+      },
+      {
+        "order": 2,
+        "title": "Match bottle feeds with expression",
+        "description": "If baby gets a bottle of expressed milk or formula, consider expressing around that time to protect your supply."
+      },
+      {
+        "order": 3,
+        "title": "Use paced bottle feeding",
+        "description": "Use slow-flow teats and paced feeding so baby does not learn to prefer a very fast flow."
+      }
+    ],
+    "dos": [
+      "Do discuss your combination feeding plan with a lactation consultant or doctor",
+      "Do watch for engorgement if breastfeeds drop suddenly",
+      "Do be kind to yourself; many families mix feeding methods"
+    ],
+    "donts": [
+      "Do not change your feeding pattern rapidly without considering your supply",
+      "Do not feel you must meet anyone else's idea of 'perfect' feeding",
+      "Do not ignore baby's hunger and fullness cues"
+    ],
+    "when_to_expect_improvement": "Once you have a clear, consistent routine, many feeding worries ease over days to weeks.",
+    "red_flags": [
+      "Baby not gaining weight well",
+      "Severe engorgement or blocked ducts after schedule changes",
+      "Parental distress or conflict around feeding decisions"
+    ],
+    "recommended_action_if_red_flags": "Seek professional guidance if weight gain, your supply, or emotional strain become concerns.",
+    "disclaimer": "General guidance only; your feeding plan should be personalised.",
+    "related_slugs": ["bottle-preference", "low-milk-supply-concern"],
+    "best_for_profiles": ["first-time-mom", "twins"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Combination feeding overview."
+  },
+  {
+    "id": 17,
+    "slug": "bottle-preference",
+    "title_user": "My baby prefers the bottle and refuses the breast",
+    "title_clinical": "Bottle preference",
+    "severity": "yellow",
+    "category": "baby-behaviour",
+    "tags": ["bottle-preference", "flow-difference"],
+    "peak_timing": "Often appears after bottles are introduced early or with fast-flow teats.",
+    "what_it_is": "Some babies come to prefer the easier, faster flow of a bottle compared with the breast. This can make returning to breastfeeding harder but not always impossible.",
+    "body_signals": [
+      "Engorgement or fullness if baby avoids breastfeeds",
+      "Possible drop in supply over time"
+    ],
+    "baby_signals": [
+      "Crying or pushing away from the breast",
+      "Eagerly taking a bottle right afterward",
+      "Frustration at slower flow at the breast"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Slow bottle feeds down",
+        "description": "Use slow-flow teats and paced bottle feeding so baby works a bit harder for milk and does not get used to a very rapid flow."
+      },
+      {
+        "order": 2,
+        "title": "Offer breast in calm moments",
+        "description": "Try offering the breast when baby is sleepy or just waking, without pressure, in a quiet environment."
+      },
+      {
+        "order": 3,
+        "title": "Protect your supply",
+        "description": "If baby is taking most feeds by bottle, consider expressing to maintain your milk supply while you work on breastfeeding."
+      }
+    ],
+    "dos": [
+      "Do seek lactation support if returning to more breastfeeding is your goal",
+      "Do be patient and celebrate small wins at the breast",
+      "Do monitor baby's weight and intake regardless of method"
+    ],
+    "donts": [
+      "Do not force baby's head onto the breast",
+      "Do not blame yourself; feeding journeys are complex",
+      "Do not abruptly remove all bottles without a safe plan"
+    ],
+    "when_to_expect_improvement": "Changes can be slow; some babies gradually accept more breastfeeds over days to weeks with gentle persistence.",
+    "red_flags": [
+      "Baby not gaining weight well on bottles",
+      "Parental distress, exhaustion, or conflict around feeding plans"
+    ],
+    "recommended_action_if_red_flags": "Reach out to your healthcare provider and a lactation consultant if weight gain or your well-being is affected.",
+    "disclaimer": "General educational information only.",
+    "related_slugs": ["baby-refusing-breast", "combination-feeding-confusion"],
+    "best_for_profiles": ["first-time-mom"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Bottle preference and paced feeding."
+  },
+  {
+    "id": 18,
+    "slug": "night-time-engorgement",
+    "title_user": "My breasts are painfully full at night",
+    "title_clinical": "Night-time engorgement",
+    "severity": "green",
+    "category": "breast",
+    "tags": ["night", "engorgement"],
+    "peak_timing": "Common when baby starts doing longer stretches of sleep or feeding patterns change.",
+    "what_it_is": "When baby sleeps longer, your breasts may still produce milk on the old schedule and become very full overnight. This can be uncomfortable and may risk blocked ducts.",
+    "body_signals": [
+      "Very full, aching breasts at night or early morning",
+      "Difficulty getting comfortable while lying down"
+    ],
+    "baby_signals": [
+      "Longer night sleep stretches",
+      "Strong feeds when finally waking"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Offer a feed before you sleep",
+        "description": "Feed or dream-feed baby before you go to bed to reduce the length of the longest stretch without milk removal."
+      },
+      {
+        "order": 2,
+        "title": "Use brief expression for comfort",
+        "description": "If you wake very full and uncomfortable, hand-express or pump a small amount just to relieve pressure, not to fully empty."
+      },
+      {
+        "order": 3,
+        "title": "Support your breasts at night",
+        "description": "Wear a soft, supportive sleep bra and use breast pads if leaking bothers you."
+      }
+    ],
+    "dos": [
+      "Do monitor for lumps or red areas that could indicate a blocked duct",
+      "Do adjust how much you express so you don't overstimulate supply",
+      "Do enjoy longer sleep stretches when they come"
+    ],
+    "donts": [
+      "Do not ignore persistent pain, lumps, or fever",
+      "Do not regularly fully empty breasts at night if you want supply to settle",
+      "Do not wear very tight bras while sleeping"
+    ],
+    "when_to_expect_improvement": "Your supply usually adapts to baby's new pattern over days to weeks, and night-time fullness often eases.",
+    "red_flags": [
+      "Hard, painful lump that doesn't improve after feeds",
+      "Fever or flu-like symptoms",
+      "Red, hot area on the breast"
+    ],
+    "recommended_action_if_red_flags": "Seek medical review if you develop signs of blocked duct or mastitis.",
+    "disclaimer": "General information only; not a substitute for medical advice.",
+    "related_slugs": ["engorgement", "blocked-duct"],
+    "best_for_profiles": [],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Night engorgement with longer baby sleep."
+  },
+  {
+    "id": 19,
+    "slug": "one-breast-producing-less",
+    "title_user": "One of my breasts seems to produce less milk than the other",
+    "title_clinical": "Asymmetric supply",
+    "severity": "green",
+    "category": "breast",
+    "tags": ["supply-difference", "asymmetry"],
+    "peak_timing": "Often noticed once pumping starts or baby shows a side preference.",
+    "what_it_is": "It is common for one breast to produce more milk than the other. Mild differences are usually not a problem if baby's overall intake is good.",
+    "body_signals": [
+      "One breast feels fuller or emptier than the other",
+      "Different pumping volumes from each side"
+    ],
+    "baby_signals": [
+      "Preference for one side during feeds",
+      "Fussiness on the side with slower flow"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Offer the lower-producing side first",
+        "description": "Start feeds on the side that produces less so baby's strongest sucking stimulates that breast."
+      },
+      {
+        "order": 2,
+        "title": "Add extra stimulation if needed",
+        "description": "If you pump, consider a few extra minutes on the lower-producing side to signal more demand."
+      },
+      {
+        "order": 3,
+        "title": "Monitor baby's overall intake",
+        "description": "Focus on baby's total wet diapers and weight gain rather than perfect symmetry between breasts."
+      }
+    ],
+    "dos": [
+      "Do accept some natural left-right differences",
+      "Do seek support if one side is consistently painful or very low in output",
+      "Do adjust positions to make the less preferred side more comfortable for baby"
+    ],
+    "donts": [
+      "Do not panic if one side pumps less; many mothers are like this",
+      "Do not ignore significant pain or lumps on either side"
+    ],
+    "when_to_expect_improvement": "Some differences remain, but small adjustments can improve comfort and output over time.",
+    "red_flags": [
+      "Sudden drop in supply on one side with pain or lumps",
+      "Visible deformity or skin changes on one breast"
+    ],
+    "recommended_action_if_red_flags": "Seek medical evaluation for sudden or unexplained changes in one breast.",
+    "disclaimer": "General educational information; not a substitute for a breast exam when needed.",
+    "related_slugs": ["blocked-duct", "engorgement"],
+    "best_for_profiles": [],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Normal asymmetric supply."
+  },
+  {
+    "id": 20,
+    "slug": "tongue-tie-concern",
+    "title_user": "Someone mentioned my baby might have a tongue tie",
+    "title_clinical": "Tongue-tie concern",
+    "severity": "yellow",
+    "category": "baby-behaviour",
+    "tags": ["tongue-tie", "latch"],
+    "peak_timing": "Often raised in the first weeks when latch or weight gain is difficult.",
+    "what_it_is": "Tongue-tie is when the tissue under the tongue is tighter or shorter and may restrict movement. Not all tongue-ties cause problems, but some can affect latch and milk transfer.",
+    "body_signals": [
+      "Nipple pain, damage, or repeated shallow latching",
+      "Clicking sounds and poor milk removal"
+    ],
+    "baby_signals": [
+      "Difficulty staying latched or slipping off",
+      "Heart-shaped tongue tip or limited tongue lift",
+      "Slow weight gain in some cases"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Seek a skilled feeding assessment",
+        "description": "Arrange an in-person assessment with a lactation consultant or provider experienced in tongue-tie and breastfeeding."
+      },
+      {
+        "order": 2,
+        "title": "Optimise latch and positioning",
+        "description": "Use techniques that help baby take a deeper mouthful of breast, regardless of tongue appearance."
+      },
+      {
+        "order": 3,
+        "title": "Monitor weight and symptoms",
+        "description": "Keep track of weight gain, diaper counts, and your pain levels while you seek evaluation."
+      }
+    ],
+    "dos": [
+      "Do ask for a thorough functional assessment, not just a quick look",
+      "Do get a second opinion if recommendations are unclear",
+      "Do consider your goals and baby's overall health when deciding on treatment"
+    ],
+    "donts": [
+      "Do not rush into procedures based solely on appearance without a feeding assessment",
+      "Do not ignore ongoing severe pain or poor weight gain"
+    ],
+    "when_to_expect_improvement": "If treatment is recommended and performed, some families notice changes quickly; for others, improvement takes practice and time.",
+    "red_flags": [
+      "Persistent poor weight gain despite support",
+      "Severe maternal nipple trauma that does not improve",
+      "Baby shows signs of feeding distress"
+    ],
+    "recommended_action_if_red_flags": "Seek coordinated care between your baby's doctor and feeding specialists if problems persist.",
+    "disclaimer": "This card does not diagnose tongue-tie and cannot replace in-person assessment.",
+    "related_slugs": ["shallow-latch-pain", "cracked-nipples"],
+    "best_for_profiles": ["first-time-mom"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Tongue-tie suspicion and next steps."
+  },
+  {
+    "id": 21,
+    "slug": "thrush-nipple",
+    "title_user": "I have burning nipple pain and shiny skin",
+    "title_clinical": "Possible nipple thrush",
+    "severity": "yellow",
+    "category": "nipple",
+    "tags": ["thrush", "infection"],
+    "peak_timing": "Can occur any time, sometimes after antibiotics.",
+    "what_it_is": "Nipple thrush is a yeast infection on the nipple and areola that can cause burning pain and shiny skin. Baby may also have thrush in the mouth or diaper area.",
+    "body_signals": [
+      "Burning or shooting nipple pain during and after feeds",
+      "Shiny or flaky skin on the nipple/areola",
+      "Pain in both breasts that lingers between feeds"
+    ],
+    "baby_signals": [
+      "White patches inside the mouth that do not wipe off easily",
+      "Diaper rash that is shiny or not improving"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Seek medical diagnosis",
+        "description": "Contact your healthcare provider to confirm whether this is thrush and to discuss treatment options for you and baby."
+      },
+      {
+        "order": 2,
+        "title": "Maintain good hygiene",
+        "description": "Change breast pads frequently, wash hands often, and keep nipples dry between feeds."
+      },
+      {
+        "order": 3,
+        "title": "Manage discomfort",
+        "description": "Ask your provider about safe pain relief options and continue breastfeeding if advised."
+      }
+    ],
+    "dos": [
+      "Do treat both you and baby if thrush is diagnosed",
+      "Do wash items like pacifiers, pump parts, and bras thoroughly",
+      "Do complete the full course of prescribed treatment"
+    ],
+    "donts": [
+      "Do not self-diagnose persistent pain without medical input",
+      "Do not stop treatment early if symptoms improve"
+    ],
+    "when_to_expect_improvement": "With appropriate treatment, many mothers notice improvement in several days, though full resolution may take longer.",
+    "red_flags": [
+      "Worsening pain despite treatment",
+      "New symptoms such as fever or spreading redness"
+    ],
+    "recommended_action_if_red_flags": "If symptoms persist or worsen, follow up with your provider.",
+    "disclaimer": "This is general information and does not replace medical diagnosis or treatment.",
+    "related_slugs": ["cracked-nipples", "shallow-latch-pain"],
+    "best_for_profiles": [],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Nipple/breast thrush suspicion."
+  },
+  {
+    "id": 22,
+    "slug": "gassy-baby-fussiness",
+    "title_user": "My baby is very gassy and fussy after feeds",
+    "title_clinical": "Gassy baby fussiness",
+    "severity": "green",
+    "category": "baby-behaviour",
+    "tags": ["gas", "fussiness"],
+    "peak_timing": "Common in the first months as digestion matures.",
+    "what_it_is": "Gas and fussiness after feeds are common as baby's gut develops. Feeding positions, latch, and swallowing air can all contribute.",
+    "body_signals": [
+      "No major breast symptoms; your main concern is baby's behaviour"
+    ],
+    "baby_signals": [
+      "Pulling legs up, grunting, or passing gas",
+      "Crying or fussiness after feeds, especially in the evening",
+      "May be harder to settle flat on their back"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Review latch and flow",
+        "description": "Work toward a deep latch and comfortable flow so baby swallows less air."
+      },
+      {
+        "order": 2,
+        "title": "Use burping and upright time",
+        "description": "Burp baby during and after feeds and hold them upright for a while after feeding."
+      },
+      {
+        "order": 3,
+        "title": "Offer soothing strategies",
+        "description": "Try gentle rocking, white noise, or baby-wearing if baby is otherwise well."
+      }
+    ],
+    "dos": [
+      "Do track patterns of fussiness and gas",
+      "Do talk to your provider if fussiness is severe or you are worried",
+      "Do watch for other signs of illness or allergy"
+    ],
+    "donts": [
+      "Do not shake the baby as a soothing method",
+      "Do not assume all crying is due to gas; consider other needs too"
+    ],
+    "when_to_expect_improvement": "Many babies become less gassy and fussy as their digestive system matures over the first few months.",
+    "red_flags": [
+      "Vomiting green bile or blood",
+      "Distended, hard belly with inconsolable crying",
+      "Poor weight gain or blood in stools"
+    ],
+    "recommended_action_if_red_flags": "Seek urgent medical care if you see these concerning signs.",
+    "disclaimer": "General soothing information only; does not replace medical advice.",
+    "related_slugs": ["overactive-letdown", "fast-letdown-choking"],
+    "best_for_profiles": [],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Gas and fussiness reassurance."
+  },
+  {
+    "id": 23,
+    "slug": "weaning-too-early-pressure",
+    "title_user": "I feel pressured to stop breastfeeding before I'm ready",
+    "title_clinical": "Early weaning pressure",
+    "severity": "green",
+    "category": "emotional",
+    "tags": ["weaning", "social-pressure"],
+    "peak_timing": "Any time others question or criticise your feeding choices.",
+    "what_it_is": "Family, friends, or workplace demands can create pressure to wean earlier than you want. Your feeding choices are personal and deserve support.",
+    "body_signals": [
+      "Possible engorgement or discomfort if feeds are skipped suddenly",
+      "Fatigue or emotional strain"
+    ],
+    "baby_signals": [
+      "No specific physical signs; may react to changes in routine"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Clarify your own wishes",
+        "description": "Reflect on what you want for feeding right now and in the near future, separate from others' opinions."
+      },
+      {
+        "order": 2,
+        "title": "Seek supportive voices",
+        "description": "Talk with people who support your goals, including healthcare providers and peer support groups."
+      },
+      {
+        "order": 3,
+        "title": "Adjust gradually if you decide to wean",
+        "description": "If you choose to wean, do so slowly to protect your comfort and your baby's adjustment."
+      }
+    ],
+    "dos": [
+      "Do remember that your feeding choices are valid",
+      "Do ask about your legal rights and workplace accommodations if relevant",
+      "Do take care of your mental health"
+    ],
+    "donts": [
+      "Do not make big changes overnight due to pressure if you are unsure",
+      "Do not ignore your own emotional needs"
+    ],
+    "when_to_expect_improvement": "Stress may ease as you find support and make decisions that align with your values.",
+    "red_flags": [
+      "Persistent low mood, hopelessness, or anxiety",
+      "Feeling forced into decisions you do not want"
+    ],
+    "recommended_action_if_red_flags": "Seek mental health and medical support if you feel overwhelmed, hopeless, or pressured beyond your control.",
+    "disclaimer": "Emotional support information only; not a substitute for mental health care.",
+    "related_slugs": ["emotional-overwhelm-breastfeeding"],
+    "best_for_profiles": ["first-time-mom"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Social pressure around weaning."
+  },
+  {
+    "id": 24,
+    "slug": "emotional-overwhelm-breastfeeding",
+    "title_user": "Breastfeeding makes me feel overwhelmed and tearful",
+    "title_clinical": "Emotional overwhelm with breastfeeding",
+    "severity": "yellow",
+    "category": "emotional",
+    "tags": ["mood", "overwhelm"],
+    "peak_timing": "Common in the early weeks when sleep is low and expectations are high.",
+    "what_it_is": "Feeding around the clock, pain, and pressure can make breastfeeding feel emotionally heavy. This can overlap with baby blues or postpartum mood changes.",
+    "body_signals": [
+      "Exhaustion, tension, or physical pain during feeds",
+      "Headaches or body aches from stress"
+    ],
+    "baby_signals": [
+      "Baby may sense your stress and become fussy, or may feed as usual"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Name what you are feeling",
+        "description": "It can help to say out loud or write down that breastfeeding feels hard right now and that these feelings are valid."
+      },
+      {
+        "order": 2,
+        "title": "Ask for practical help",
+        "description": "Have someone else handle tasks like meals, laundry, or burping so you can focus on feeding and rest."
+      },
+      {
+        "order": 3,
+        "title": "Build small breaks into your day",
+        "description": "Even a short walk, shower, or quiet cup of tea while someone holds the baby can help recharge you."
+      }
+    ],
+    "dos": [
+      "Do talk honestly with a trusted person or professional about how you feel",
+      "Do screen for postpartum depression or anxiety with your provider",
+      "Do consider adjusting your feeding plan if needed for your mental health"
+    ],
+    "donts": [
+      "Do not suffer in silence",
+      "Do not believe you are failing; many mothers feel this way",
+      "Do not ignore thoughts of harming yourself or others"
+    ],
+    "when_to_expect_improvement": "With support, validation, and rest, many mothers find emotional load lightens over weeks, but persistent symptoms need professional help.",
+    "red_flags": [
+      "Feeling hopeless most of the day for more than two weeks",
+      "Loss of interest in things you usually enjoy",
+      "Thoughts of harming yourself or your baby"
+    ],
+    "recommended_action_if_red_flags": "Seek immediate help from a mental health professional, your doctor, or emergency services if you have thoughts of harming yourself or your baby.",
+    "disclaimer": "This is not a mental health diagnosis and cannot replace professional care.",
+    "related_slugs": ["weaning-too-early-pressure"],
+    "best_for_profiles": ["first-time-mom"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Emotional load with breastfeeding."
+  },
+  {
+    "id": 25,
+    "slug": "anxiety-about-milk-intake",
+    "title_user": "I can't see how much baby is getting and it makes me anxious",
+    "title_clinical": "Anxiety about milk intake",
+    "severity": "green",
+    "category": "emotional",
+    "tags": ["anxiety", "intake", "uncertainty"],
+    "peak_timing": "Very common in the first weeks when breastfeeding is new.",
+    "what_it_is": "Unlike bottles, breasts do not show measurements. Many mothers feel anxious about whether baby is getting enough, especially at night or during growth spurts.",
+    "body_signals": [
+      "Tension or tightness during feeds",
+      "Racing thoughts or worry focused on milk amount"
+    ],
+    "baby_signals": [
+      "Feeding patterns may be normal, but you still feel unsure",
+      "Cluster feeding or fussiness can increase worry"
+    ],
+    "immediate_relief_steps": [
+      {
+        "order": 1,
+        "title": "Use objective signs",
+        "description": "Track wet and dirty diapers and attend weight checks to get concrete information on intake."
+      },
+      {
+        "order": 2,
+        "title": "Limit late-night searching",
+        "description": "Set boundaries around scrolling through conflicting advice and focus on trusted sources."
+      },
+      {
+        "order": 3,
+        "title": "Share the mental load",
+        "description": "Talk with your partner or support person so you are not holding all the worry alone."
+      }
+    ],
+    "dos": [
+      "Do ask your healthcare provider what weight gain and diapers to expect",
+      "Do seek reassurance and education from a lactation consultant",
+      "Do practice self-kindness; worry often comes from caring deeply"
+    ],
+    "donts": [
+      "Do not rely solely on apps or social media for reassurance",
+      "Do not compare your baby to every other baby's schedule or size"
+    ],
+    "when_to_expect_improvement": "Confidence often grows as you see your baby thrive and get used to their feeding patterns over time.",
+    "red_flags": [
+      "Persistent, intrusive worries that interfere with sleep or daily life",
+      "Physical symptoms of anxiety like palpitations, shaking, or panic"
+    ],
+    "recommended_action_if_red_flags": "If worry feels out of control, speak with your healthcare provider or a mental health professional.",
+    "disclaimer": "General emotional support information only; not a mental health diagnosis.",
+    "related_slugs": ["low-milk-supply-concern", "cluster-feeding"],
+    "best_for_profiles": ["first-time-mom"],
+    "version": 1,
+    "status": "synthetic-dev-only",
+    "last_reviewed_at": "2026-01-01T00:00:00Z",
+    "reviewed_by": "SYNTHETIC_PLACEHOLDER",
+    "source_notes": "Normal anxiety about unseen intake."
+  }
+]
