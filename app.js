@@ -988,30 +988,38 @@ function showMealDay(dayNum) {
   var b   = d.baby || {};
   var meals = m.meals || {};
 
+  var mealSectionHeader = function(label, icon) {
+    return '<div style="display:flex;align-items:center;gap:.4rem;margin:.875rem 0 .5rem;">' +
+      '<span class="material-symbols-outlined" style="font-size:1rem;color:var(--primary);">' + icon + '</span>' +
+      '<span style="font-size:.875rem;font-weight:700;color:var(--on-surface);">' + label + '</span>' +
+    '</div>';
+  };
+
   var mealItem = function(label, icon, item) {
     if (!item) return '';
-    return '<div style="display:flex;align-items:center;gap:.4rem;margin:.875rem 0 .5rem;">' +
-        '<span class="material-symbols-outlined" style="font-size:1rem;color:var(--primary);">' + icon + '</span>' +
-        '<span style="font-size:.875rem;font-weight:700;color:var(--on-surface);">' + label + '</span>' +
-      '</div>' +
-      '<div class="meal-item">' +
-        '<p class="mi-name">' + esc(item.name) + '</p>' +
-        (item.why ? '<p class="mi-why">' + esc(item.why) + '</p>' : '') +
-        (item.recipe_tip ? '<p class="mi-tip">' + esc(item.recipe_tip) + '</p>' : '') +
+    return mealSectionHeader(label, icon) +
+      '<div class="meal-item-card">' +
+        '<p class="meal-item-name">' + esc(item.name) + '</p>' +
+        (item.why ? '<p class="meal-item-why">' + esc(item.why) + '</p>' : '') +
+        (item.recipe_tip ? '<p class="meal-item-tip">' + esc(item.recipe_tip) + '</p>' : '') +
       '</div>';
   };
 
   var snacks = (meals.snacks || []);
   var snacksHtml = snacks.length
-    ? '<div style="display:flex;align-items:center;gap:.4rem;margin:.875rem 0 .5rem;"><span class="material-symbols-outlined" style="font-size:1rem;color:var(--primary);">nutrition</span><span style="font-size:.875rem;font-weight:700;color:var(--on-surface);">Snacks</span></div>' +
-      '<div class="snacks-mini"><div class="snacks-label"><span class="material-symbols-outlined">emoji_food_beverage</span> Throughout the day</div>' +
-      snacks.map(function(s) { return '<div class="snack-item">' + esc(s) + '</div>'; }).join('') +
+    ? mealSectionHeader('Snacks', 'nutrition') +
+      '<div class="meal-item-card">' +
+        '<p class="meal-item-label"><span class="material-symbols-outlined" style="font-size:.875rem;vertical-align:middle;">emoji_food_beverage</span> Throughout the day</p>' +
+        '<div class="snacks-list">' +
+        snacks.map(function(s) { return '<div class="snack-item">' + esc(s) + '</div>'; }).join('') +
+        '</div>' +
       '</div>'
     : '';
 
   var avoidHtml = (m.foods_to_avoid || []).length
-    ? '<div class="avoid-mini"><div class="avoid-header"><span class="material-symbols-outlined">block</span> Foods to avoid today</div>' +
-      m.foods_to_avoid.map(function(f) { return '<div class="avoid-item">' + esc(f) + '</div>'; }).join('') +
+    ? '<div class="avoid-box">' +
+        '<div class="avoid-box__header"><span class="material-symbols-outlined" style="font-size:1rem;">block</span> Foods to avoid today</div>' +
+        '<ul>' + m.foods_to_avoid.map(function(f) { return '<li>' + esc(f) + '</li>'; }).join('') + '</ul>' +
       '</div>'
     : '';
 
