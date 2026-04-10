@@ -569,3 +569,493 @@ function setNavActive(tab) {
     btn.setAttribute('aria-current', id === tab ? 'page' : 'false');
   });
 }
+
+
+/* ─────────────────────────────────────────────────────────────
+   MEAL PLAN — DATA + STATE
+   ──────────────────────────────────────────────────────────── */
+
+/** All 40 MealDay objects once loaded from JSON. */
+let mealPlan = [];
+
+/** Currently selected day (1–40) in the detail view. */
+let selectedDay = 1;
+
+/** Active tab in detail view: 'mom' | 'baby' */
+let activeMealTab = 'mom';
+
+/**
+ * Calculate the current journey day based on localStorage start date.
+ * Day 1 on first open; increments each calendar day; caps at 40.
+ */
+function getCurrentDay() {
+  let startDate = localStorage.getItem('navya_start_date');
+  if (!startDate) {
+    startDate = new Date().toISOString();
+    localStorage.setItem('navya_start_date', startDate);
+  }
+  const daysSince = Math.floor((Date.now() - new Date(startDate)) / 86400000);
+  return Math.min(Math.max(daysSince + 1, 1), 40);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   MEAL PLAN — DATA LOADING
+   ──────────────────────────────────────────────────────────── */
+
+/**
+ * Fetch meal_plan.json, then render the meal plan home screen.
+ */
+async function loadMealPlan() {
+  showMealLoading();
+  try {
+    const res = await fetch('meal_plan.json');
+    if (!res.ok) throw new Error(`Server returned ${res.status}`);
+    mealPlan = await res.json();
+    if (!Array.isArray(mealPlan)) throw new Error('Unexpected data format');
+    showMealPlanHome();
+  } catch (err) {
+    showError(err.message);
+  }
+}
+
+/**
+ * Quick loading state while fetching meal_plan.json.
+ */
+function showMealLoading() {
+  setNavActive('meal-plan');
+  setContent(`
+    <div class="pt-6 pb-4 px-2">
+      <div class="mb-10 text-center px-2">
+        <h1 class="font-headline text-4xl text-on-surface mb-3">40-Day Meal Plan</h1>
+        <div class="loading-status justify-center">
+          <div class="loading-dot skeleton-pulse"></div>
+          <p class="text-on-surface-variant">Loading your plan…</p>
+        </div>
+      </div>
+      <div class="space-y-4">
+        ${[1,2,3].map(() => `
+          <div class="bg-surface-container-low rounded-3xl p-5">
+            <div class="h-5 w-3/4 bg-surface-container-highest rounded-full skeleton-pulse mb-3"></div>
+            <div class="h-4 w-1/2 bg-surface-container-high rounded-full skeleton-pulse"></div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   SCREEN: MEAL PLAN HOME
+   ──────────────────────────────────────────────────────────── */
+
+/**
+ * Render the meal plan home: day strip + today card + phase overview.
+ */
+function showMealPlanHome() {
+  setNavActive('meal-plan');
+  const today = getCurrentDay();
+  const todayData = mealPlan.find(d => d.day === today) || mealPlan[0];
+
+  // Phase definitions for the overview cards
+  const phases = [
+    { num: 1, name: 'Phase 1 — Days 1–7',   theme: 'Rest, warmth & first healing foods',        icon: 'spa',             startDay: 1,  iconCls: 'phase-icon--1' },
+    { num: 2, name: 'Phase 2 — Days 8–14',  theme: 'Milk establishment & strength building',    icon: 'water_drop',      startDay: 8,  iconCls: 'phase-icon--2' },
+    { num: 3, name: 'Phase 3 — Days 15–21', theme: 'Strength rebuilding & gradual normalcy',    icon: 'fitness_center',  startDay: 15, iconCls: 'phase-icon--3' },
+    { num: 4, name: 'Phase 4 — Days 22–35', theme: 'Gradual normalcy & full diet recovery',     icon: 'restaurant',      startDay: 22, iconCls: 'phase-icon--4' },
+    { num: 5, name: 'Phase 5 — Days 36–40', theme: 'Milestone celebration & beyond',            icon: 'celebration',     startDay: 36, iconCls: 'phase-icon--5' },
+  ];
+
+  // 40 day pills
+  const pillsHtml = mealPlan.map(d => {
+    let cls = 'day-pill';
+    if (d.day === today) cls += ' day-pill--today';
+    else if (d.day < today) cls += ' day-pill--past';
+    return `<button class="${cls}" data-day="${d.day}" type="button" aria-label="Day ${d.day}">${d.day}</button>`;
+  }).join('');
+
+  // Phase cards
+  const phaseCardsHtml = phases.map(p => `
+    <button class="phase-card" data-start-day="${p.startDay}" type="button">
+      <div class="phase-icon ${p.iconCls}">
+        <span class="material-symbols-outlined" style="font-size:1.25rem;">${p.icon}</span>
+      </div>
+      <div class="phase-card-body">
+        <p class="phase-card-name">${esc(p.name)}</p>
+        <p class="phase-card-theme">${esc(p.theme)}</p>
+      </div>
+      <span class="material-symbols-outlined">chevron_right</span>
+    </button>
+  `).join('');
+
+  setContent(`
+    <div>
+      <!-- Page header -->
+      <header class="meal-header">
+        <h1>40-Day<br>meal plan</h1>
+        <p>Personalised nourishment for you and your baby — day by day.</p>
+      </header>
+
+      <!-- Day progress strip -->
+      <div class="day-strip-wrapper px-1">
+        <p class="day-strip-label">Your journey — day ${today} of 40</p>
+        <div class="day-strip" id="day-strip" role="list" aria-label="Day selector">
+          ${pillsHtml}
+        </div>
+      </div>
+
+      <!-- Today's summary card -->
+      <div class="today-card mx-1">
+        <p class="today-day-label">Today · Day ${today}</p>
+        <h2>${esc(todayData.phase)}</h2>
+        <p class="phase-theme">${esc(todayData.phase_theme)}</p>
+        <p class="meal-preview">
+          <strong>Breakfast</strong> ${esc(todayData.mom.meals.breakfast.name)}<br>
+          <strong>Lunch</strong> ${esc(todayData.mom.meals.lunch.name)}<br>
+          <strong>Dinner</strong> ${esc(todayData.mom.meals.dinner.name)}
+        </p>
+        <button class="view-plan-btn" id="view-today-btn" type="button">
+          <span class="material-symbols-outlined" style="font-size:1.1rem;">restaurant_menu</span>
+          View today's full plan
+        </button>
+      </div>
+
+      <!-- Phase overview -->
+      <p class="phase-section-label px-1">Browse by phase</p>
+      <section class="phase-card-list px-1" aria-label="Meal plan phases">
+        ${phaseCardsHtml}
+      </section>
+
+      <!-- Warm footer -->
+      <div class="encouragement-banner mx-1">
+        <h4>You are nourishing two lives.</h4>
+        <p>Every meal you eat feeds your recovery and your baby. Small, warm, and consistent — that's all it takes.</p>
+        <span class="material-symbols-outlined deco-icon">restaurant</span>
+      </div>
+    </div>
+  `);
+
+  // Wire today button
+  document.getElementById('view-today-btn')
+    .addEventListener('click', () => showDayDetail(today));
+
+  // Wire day pills
+  root().querySelectorAll('.day-pill').forEach(btn => {
+    btn.addEventListener('click', () => showDayDetail(parseInt(btn.dataset.day, 10)));
+  });
+
+  // Wire phase cards
+  root().querySelectorAll('.phase-card').forEach(btn => {
+    btn.addEventListener('click', () => showDayDetail(parseInt(btn.dataset.startDay, 10)));
+  });
+
+  // Scroll today's pill into view
+  const todayPill = root().querySelector('.day-pill--today');
+  if (todayPill) {
+    setTimeout(() => todayPill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }), 120);
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   SCREEN: DAY DETAIL
+   Renders the Mom / Baby two-tab view for a given day.
+   ──────────────────────────────────────────────────────────── */
+
+/**
+ * @param {number} day   1–40
+ * @param {'mom'|'baby'} [tab]  Which tab to show first
+ */
+function showDayDetail(day, tab = 'mom') {
+  const data = mealPlan.find(d => d.day === day);
+  if (!data) { showError(`Could not find day ${day}`); return; }
+
+  selectedDay = day;
+  activeMealTab = tab;
+
+  const m = data.mom;
+  const b = data.baby;
+
+  // ── Mom tab HTML ──────────────────────────────────────────
+  const snacksHtml = (m.meals.snacks || [])
+    .map(s => `<li class="snack-item">${esc(s)}</li>`)
+    .join('');
+
+  const avoidHtml = (m.foods_to_avoid || [])
+    .map(f => `<li>${esc(f)}</li>`)
+    .join('');
+
+  const momHtml = `
+    <div id="tab-mom">
+      <!-- Focus card -->
+      <div class="meal-focus-card">
+        <p>${esc(m.focus)}</p>
+      </div>
+
+      <!-- Breakfast -->
+      <h3 class="meal-section-heading">
+        <span class="material-symbols-outlined">breakfast_dining</span>
+        Breakfast
+      </h3>
+      <div class="meal-item-card">
+        <p class="meal-item-name">${esc(m.meals.breakfast.name)}</p>
+        <p class="meal-item-why">${esc(m.meals.breakfast.why)}</p>
+        <p class="meal-item-tip">${esc(m.meals.breakfast.recipe_tip)}</p>
+      </div>
+
+      <!-- Lunch -->
+      <h3 class="meal-section-heading">
+        <span class="material-symbols-outlined">lunch_dining</span>
+        Lunch
+      </h3>
+      <div class="meal-item-card">
+        <p class="meal-item-name">${esc(m.meals.lunch.name)}</p>
+        <p class="meal-item-why">${esc(m.meals.lunch.why)}</p>
+        <p class="meal-item-tip">${esc(m.meals.lunch.recipe_tip)}</p>
+      </div>
+
+      <!-- Dinner -->
+      <h3 class="meal-section-heading">
+        <span class="material-symbols-outlined">dinner_dining</span>
+        Dinner
+      </h3>
+      <div class="meal-item-card">
+        <p class="meal-item-name">${esc(m.meals.dinner.name)}</p>
+        <p class="meal-item-why">${esc(m.meals.dinner.why)}</p>
+        <p class="meal-item-tip">${esc(m.meals.dinner.recipe_tip)}</p>
+      </div>
+
+      <!-- Snacks -->
+      <h3 class="meal-section-heading">
+        <span class="material-symbols-outlined">nutrition</span>
+        Snacks
+      </h3>
+      <ul class="snacks-list">${snacksHtml}</ul>
+
+      <!-- Avoid -->
+      <div class="avoid-box">
+        <div class="avoid-box__header">
+          <span class="material-symbols-outlined" style="font-size:1rem;">block</span>
+          Foods to avoid today
+        </div>
+        <ul>${avoidHtml}</ul>
+      </div>
+
+      <!-- Hydration -->
+      <div class="hydration-card">
+        <span class="material-symbols-outlined">water_drop</span>
+        <p>${esc(m.hydration_tip)}</p>
+      </div>
+
+      <!-- Tradition -->
+      <div class="tradition-card">
+        <span class="material-symbols-outlined">auto_awesome</span>
+        <p>${esc(m.traditional_note)}</p>
+      </div>
+    </div>
+  `;
+
+  // ── Baby tab HTML ─────────────────────────────────────────
+  const signsWellHtml = (b.signs_feeding_well || [])
+    .map(s => `<li>${esc(s)}</li>`).join('');
+
+  const signsWatchHtml = (b.signs_to_watch || [])
+    .map(s => `<li>${esc(s)}</li>`).join('');
+
+  const babyHtml = `
+    <div id="tab-baby">
+      <!-- Feeding overview cards -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.25rem;">
+        <div class="baby-info-card">
+          <p class="baby-info-card__label">Feeding type</p>
+          <p class="baby-info-card__value">${esc(b.feeding_type)}</p>
+        </div>
+        <div class="baby-info-card">
+          <p class="baby-info-card__label">Feeds per day</p>
+          <p class="baby-info-card__value">${esc(b.feeds_per_day)}</p>
+        </div>
+      </div>
+
+      <!-- What to expect -->
+      <h3 class="meal-section-heading meal-section-heading--baby">
+        <span class="material-symbols-outlined" style="color:var(--secondary);">child_care</span>
+        What to expect today
+      </h3>
+      <div class="meal-focus-card" style="background:rgba(255,218,212,0.15);">
+        <p>${esc(b.what_to_expect)}</p>
+      </div>
+
+      <!-- Signs grid -->
+      <div class="signs-grid">
+        <div class="signs-box signs-box--well">
+          <div class="signs-box__header">
+            <span class="material-symbols-outlined">check_circle</span>
+            Signs all is well
+          </div>
+          <ul>${signsWellHtml}</ul>
+        </div>
+        <div class="signs-box signs-box--watch">
+          <div class="signs-box__header">
+            <span class="material-symbols-outlined">warning</span>
+            Signs to watch
+          </div>
+          <ul>${signsWatchHtml}</ul>
+        </div>
+      </div>
+
+      <!-- Latch tip -->
+      <h3 class="meal-section-heading meal-section-heading--baby">
+        <span class="material-symbols-outlined" style="color:var(--secondary);">tips_and_updates</span>
+        Today's feeding tip
+      </h3>
+      <div class="latch-tip-card">
+        <p class="latch-tip-card__label">Latch &amp; feeding guidance</p>
+        <p>${esc(b.latch_tip)}</p>
+      </div>
+    </div>
+  `;
+
+  // ── Assemble the full detail page ──────────────────────────
+  setContent(`
+    <div class="meal-detail-wrap">
+
+      <!-- Back button -->
+      <button class="detail-back-btn" id="meal-back-btn" type="button" aria-label="Back to meal plan">
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+        Meal plan
+      </button>
+
+      <!-- Day badge + phase -->
+      <div class="detail-badges">
+        <span class="category-badge">Day ${day}</span>
+        <span class="category-badge">${esc(data.phase.split('—')[0].trim())}</span>
+      </div>
+
+      <!-- Title -->
+      <h1 class="detail-title">${esc(data.phase_theme)}</h1>
+      <p class="detail-clinical">
+        <span class="material-symbols-outlined" aria-hidden="true">restaurant_menu</span>
+        ${esc(data.phase)}
+      </p>
+
+      <!-- Mom / Baby toggle -->
+      <div class="meal-tabs" role="tablist" aria-label="Meal plan view">
+        <button
+          class="meal-tab ${tab === 'mom' ? 'meal-tab--active' : ''}"
+          id="tab-btn-mom"
+          role="tab"
+          aria-selected="${tab === 'mom'}"
+          type="button"
+        >
+          <span class="material-symbols-outlined" style="font-size:1rem;vertical-align:middle;margin-right:4px;">person</span>
+          For Mom
+        </button>
+        <button
+          class="meal-tab meal-tab--baby ${tab === 'baby' ? 'meal-tab--active' : ''}"
+          id="tab-btn-baby"
+          role="tab"
+          aria-selected="${tab === 'baby'}"
+          type="button"
+        >
+          <span class="material-symbols-outlined" style="font-size:1rem;vertical-align:middle;margin-right:4px;">child_care</span>
+          For Baby
+        </button>
+      </div>
+
+      <!-- Tab content -->
+      <div id="meal-tab-content">
+        ${tab === 'mom' ? momHtml : babyHtml}
+      </div>
+
+      <!-- Day navigation -->
+      <div style="display:flex;gap:0.75rem;margin-top:1.5rem;">
+        ${day > 1 ? `
+          <button
+            class="detail-back-btn"
+            id="prev-day-btn"
+            type="button"
+            style="flex:1;justify-content:center;background:var(--surface-container-low);border-radius:var(--radius-pill);padding:0.75rem;"
+          >
+            <span class="material-symbols-outlined">arrow_back</span>
+            Day ${day - 1}
+          </button>
+        ` : '<div style="flex:1;"></div>'}
+        ${day < 40 ? `
+          <button
+            class="view-plan-btn"
+            id="next-day-btn"
+            type="button"
+            style="flex:1;"
+          >
+            Day ${day + 1}
+            <span class="material-symbols-outlined" style="font-size:1.1rem;">arrow_forward</span>
+          </button>
+        ` : ''}
+      </div>
+
+    </div>
+  `);
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Wire back button
+  document.getElementById('meal-back-btn')
+    .addEventListener('click', showMealPlanHome);
+
+  // Wire tab toggle
+  const tabContent = document.getElementById('meal-tab-content');
+  document.getElementById('tab-btn-mom').addEventListener('click', () => {
+    document.getElementById('tab-btn-mom').classList.add('meal-tab--active');
+    document.getElementById('tab-btn-mom').setAttribute('aria-selected', 'true');
+    document.getElementById('tab-btn-baby').classList.remove('meal-tab--active');
+    document.getElementById('tab-btn-baby').setAttribute('aria-selected', 'false');
+    tabContent.innerHTML = momHtml;
+  });
+
+  document.getElementById('tab-btn-baby').addEventListener('click', () => {
+    document.getElementById('tab-btn-baby').classList.add('meal-tab--active');
+    document.getElementById('tab-btn-baby').setAttribute('aria-selected', 'true');
+    document.getElementById('tab-btn-mom').classList.remove('meal-tab--active');
+    document.getElementById('tab-btn-mom').setAttribute('aria-selected', 'false');
+    tabContent.innerHTML = babyHtml;
+  });
+
+  // Wire prev/next day
+  const prevBtn = document.getElementById('prev-day-btn');
+  const nextBtn = document.getElementById('next-day-btn');
+  if (prevBtn) prevBtn.addEventListener('click', () => showDayDetail(day - 1, activeMealTab));
+  if (nextBtn) nextBtn.addEventListener('click', () => showDayDetail(day + 1, activeMealTab));
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   NAV WIRING — update setNavActive to handle meal-plan tab
+   ──────────────────────────────────────────────────────────── */
+
+// Override setNavActive to add meal-plan support
+const _origSetNavActive = setNavActive;
+function setNavActive(tab) {
+  // Handle the more/meal-plan tab visual state
+  const moreBtn = document.getElementById('nav-more');
+  if (moreBtn) {
+    if (tab === 'meal-plan') {
+      moreBtn.classList.add('nav--active');
+      moreBtn.setAttribute('aria-current', 'page');
+    } else {
+      moreBtn.classList.remove('nav--active');
+      moreBtn.setAttribute('aria-current', 'false');
+    }
+  }
+  // Delegate to original for symptoms tab
+  if (tab !== 'meal-plan') {
+    ['symptoms', 'positions'].forEach(id => {
+      const btn = document.getElementById(`nav-${id}`);
+      if (!btn) return;
+      btn.setAttribute('aria-current', id === tab ? 'page' : 'false');
+    });
+  } else {
+    const symptomsBtn = document.getElementById('nav-symptoms');
+    if (symptomsBtn) symptomsBtn.setAttribute('aria-current', 'false');
+  }
+}

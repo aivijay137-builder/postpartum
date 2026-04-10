@@ -247,16 +247,15 @@
       <!-- Remove "disabled" attribute and update aria when More screen is built -->
       <button
         id="nav-more"
-        data-nav="more"
-        aria-label="More – coming soon"
-        disabled
+        data-nav="meal-plan"
+        aria-label="40-Day Meal Plan"
         class="flex flex-col items-center justify-center
-               text-on-surface-variant opacity-40
+               text-on-surface-variant
                rounded-full px-6 py-2.5
-               cursor-not-allowed"
+               transition-all duration-300 active:scale-95"
       >
-        <span class="material-symbols-outlined mb-0.5">more_horiz</span>
-        <span class="text-[11px] font-medium tracking-wide uppercase font-label">More</span>
+        <span class="material-symbols-outlined mb-0.5">restaurant_menu</span>
+        <span class="text-[11px] font-medium tracking-wide uppercase font-label">Meal Plan</span>
       </button>
 
     </div>
@@ -278,6 +277,34 @@
        CHANGE PATH if app.js moves to a sub-folder, e.g. "js/app.js"
   ════════════════════════════════════════════════════════════════════════════ -->
   <script src="app.js"></script>
+
+  <script>
+    // Wire the Meal Plan nav tab
+    document.addEventListener('DOMContentLoaded', () => {
+      const moreBtn = document.getElementById('nav-more');
+      if (moreBtn) {
+        moreBtn.addEventListener('click', () => {
+          if (mealPlan.length > 0) {
+            showMealPlanHome();
+          } else {
+            loadMealPlan();
+          }
+        });
+      }
+
+      // Re-wire Symptoms tab to go back to symptoms
+      const symptomsBtn = document.getElementById('nav-symptoms');
+      if (symptomsBtn) {
+        symptomsBtn.addEventListener('click', () => {
+          if (allCards.length > 0) {
+            showSymptomList();
+          } else {
+            loadCards();
+          }
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>
