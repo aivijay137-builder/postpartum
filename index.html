@@ -18,6 +18,12 @@
     body { margin: 0; background: #faf9f5; }
     #app-root { min-height: calc(100dvh - 144px); }
   </style>
+
+  <!-- Supabase JS v2 (UMD build — exposes window.supabase) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <!-- Navya auth layer — must load before app.js -->
+  <script src="supabase.js"></script>
+  <script src="auth.js"></script>
 </head>
 <body>
 

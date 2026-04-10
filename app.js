@@ -1177,6 +1177,18 @@ function showSettings() {
       '</div>' +
       '<p style="font-size:.75rem;color:var(--on-surface-var);text-align:center;margin-top:.5rem;line-height:1.55;">The PIN is a convenience gate for a shared device, not encryption. Data is stored in browser localStorage and readable by anyone with device access.</p>' +
     '</div>' +
+
+    '<div class="settings-section">' +
+      '<div class="settings-section-label">Account</div>' +
+      '<div class="settings-card">' +
+        '<div class="settings-row">' +
+          '<div class="sr-icon sr-icon-grey"><span class="material-symbols-outlined">logout</span></div>' +
+          '<div class="sr-body"><div class="sr-title">Sign out</div><div class="sr-sub">You\'ll need to sign in again to access your journal</div></div>' +
+          '<div class="sr-action"><button class="settings-signout-btn" onclick="Auth.signOut()">Sign out</button></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+
     '</div>'
   );
 }
@@ -1466,26 +1478,7 @@ NotifManager.prototype.savePrefs = function(overrides) {
 
 document.addEventListener('DOMContentLoaded', function() {
   notifMgr = new NotifManager();
-
-  if (!DB.get('navya_onboarded')) {
-    var nav = document.querySelector('.nav-bottom');
-    if (nav) nav.style.display = 'none';
-    obData = {};
-    obStep = 1;
-    showOnboarding(1);
-    return;
-  }
-
-  currentDay = getCurrentDay();
-  notifMgr.restoreFromPrefs(DB.getNotifPrefs());
-
-  route(location.hash || '#home');
-
-  // Preload JSON data in background
-  if (!allCards.length) {
-    fetch('./bf_symptom_cards.json').then(function(r){ return r.json(); }).then(function(d){ allCards = d; }).catch(function(){});
-  }
-  if (!mealPlan.length) {
-    fetch('./meal_plan.json').then(function(r){ return r.json(); }).then(function(d){ mealPlan = d; }).catch(function(){});
-  }
+  // Auth.init() checks the Supabase session, shows the auth screen if needed,
+  // and calls back into this app once the user is authenticated.
+  Auth.init();
 });
