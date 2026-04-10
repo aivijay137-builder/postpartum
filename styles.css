@@ -2489,3 +2489,110 @@ a, button {
   }
   .quick-grid { grid-template-columns: repeat(4, 1fr); }
 }
+
+
+/* ──────────────────────────────────────────────────────────────
+   VOICE NOTE — three-state UI  (idle / recording / recorded)
+   ──────────────────────────────────────────────────────────── */
+
+.voice-section { margin-bottom: .5rem; }
+
+/* Each state is a flex row */
+.voice-state {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  margin-bottom: .375rem;
+}
+.voice-hint {
+  font-size: .8125rem;
+  color: var(--on-surface-var);
+}
+
+/* Recording indicator */
+.voice-recording-info {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.voice-rec-dot {
+  width: .5rem;
+  height: .5rem;
+  border-radius: 50%;
+  background: var(--error);
+  animation: voice-pulse 1s ease-in-out infinite;
+}
+@keyframes voice-pulse {
+  0%, 100% { opacity: 1; transform: scale(1);   }
+  50%       { opacity: .4; transform: scale(.75); }
+}
+.voice-rec-label {
+  font-size: .6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--error);
+}
+.voice-rec-timer {
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--on-surface);
+  font-variant-numeric: tabular-nums;
+  min-width: 2.25rem;
+}
+
+/* Recorded state — wrap controls on narrow screens */
+.voice-state--recorded {
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+/* Play / pause button */
+.voice-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  padding: .4375rem .875rem;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  border: none;
+  border-radius: 2rem;
+  font-size: .8125rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.voice-play-btn:hover { opacity: .85; }
+.voice-play-btn .material-symbols-outlined { font-size: 1rem; }
+
+/* Delete button */
+.voice-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: .4375rem .625rem;
+  background: var(--error-container);
+  color: var(--error);
+  border: none;
+  border-radius: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.voice-delete-btn:hover { opacity: .85; }
+
+/* Re-record link-style button */
+.voice-rerecord-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  padding: .4375rem .75rem;
+  background: none;
+  color: var(--primary);
+  border: 1.5px solid var(--primary-container);
+  border-radius: 2rem;
+  font-size: .8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s;
+}
+.voice-rerecord-btn:hover { background: rgba(70,103,67,.06); }
