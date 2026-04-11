@@ -750,13 +750,13 @@ function showSymptomList() {
         : card.severity === 'green' ? 'pill pill-green"' : 'pill pill-yellow"';
       var pillLbl = card.severity === 'red' ? 'Urgent' : card.severity === 'green' ? 'Normal' : 'Attention';
       return '<button class="symptom-card" onclick="navigate(\'#symptom/' + esc(card.slug) + '\')">' +
-        '<div class="sc-top">' +
+        '<div class="symptom-card__top">' +
           '<div>' +
-            '<p class="sc-title">' + esc(card.title_user||card.title||card.slug) + '</p>' +
+            '<p class="symptom-card__title">' + esc(card.title_user||card.title||card.slug) + '</p>' +
           '</div>' +
           '<span class="' + pillCls + '">' + pillLbl + '</span>' +
         '</div>' +
-        '<div class="sc-action">View guide <span class="material-symbols-outlined">arrow_forward</span></div>' +
+        '<div class="symptom-card__action">View guide <span class="material-symbols-outlined">arrow_forward</span></div>' +
       '</button>';
     }).join('');
     return '<div style="margin-bottom:1.5rem;">' +
