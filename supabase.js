@@ -20,4 +20,18 @@
       detectSessionInUrl: false   // app uses hash routing — don't parse URL for tokens
     }
   });
+
+  // Ensure an auth session always exists.
+  // signInAnonymously() is a no-op when a session is already stored in localStorage.
+  window._supabaseClient.auth.getSession().then(function (result) {
+    if (!result.data.session) {
+      window._supabaseClient.auth.signInAnonymously().then(function (res) {
+        if (res.error) {
+          console.warn('Navya: anonymous sign-in failed —', res.error.message);
+        } else {
+          console.log('Navya: anonymous session created', res.data.user.id);
+        }
+      });
+    }
+  });
 })();

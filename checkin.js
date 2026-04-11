@@ -68,7 +68,7 @@ var CheckinService = (function () {
           user_id:           user.id,
           checkin_date:      state.date,
           mood:              state.mood        || null,
-          note_text:         state.note        || null,
+          text_note:         state.note        || null,       // was note_text
           voice_transcript:  state.voiceText   || null,
           checkin_timestamp: new Date().toISOString(),
         },
@@ -84,7 +84,7 @@ var CheckinService = (function () {
     var { error: delErr } = await _supabaseClient
       .from('daily_checkin_symptoms')
       .delete()
-      .eq('checkin_id', checkinId);
+      .eq('daily_checkin_id', checkinId);   // was checkin_id
 
     if (delErr) throw delErr;
 
@@ -96,10 +96,10 @@ var CheckinService = (function () {
           ? CHECK_IN_SYMPTOMS.find(function (s) { return s.slug === slug; })
           : null;
         return {
-          checkin_id:    checkinId,
-          symptom_slug:  slug,
-          symptom_label: meta ? meta.label    : slug,
-          severity:      meta ? meta.severity : null,
+          daily_checkin_id: checkinId,          // was checkin_id
+          symptom_slug:     slug,
+          symptom_label:    meta ? meta.label    : slug,
+          severity:         meta ? meta.severity : null,
         };
       });
 
@@ -117,8 +117,8 @@ var CheckinService = (function () {
       var { error: voiceUpdateErr } = await _supabaseClient
         .from('daily_checkins')
         .update({
-          voice_note_path: voice.path,
-          voice_note_url:  voice.url,
+          voice_note_storage_path: voice.path,  // was voice_note_path
+          voice_note_url:          voice.url,
         })
         .eq('id', checkinId);
 
