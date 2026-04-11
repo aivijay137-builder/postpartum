@@ -13,6 +13,6 @@ window.NAVYA_CONFIG = {
   supabaseUrl: 'https://notsccmtwdaqdhhirdnz.supabase.co',
   supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vdHNjY210d2RhcWRoaGlyZG56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4NDI1MDcsImV4cCI6MjA5MTQxODUwN30.zD0Ux_mj0BpE-SfRheJr3dSsng607r2b1VJMArYE5RQ',
 
-  posthogKey:  '',   // e.g. 'phc_XXXXXXXXXXXXXXXXXXXX'
-  posthogHost: '',   // leave blank for https://app.posthog.com
+  posthogKey:  'phc_Bz4Brt2tSUsxyi2Gc2Fmu8pcqMhaiRAxtnWtCoRNsPdi',   // e.g. 'phc_XXXXXXXXXXXXXXXXXXXX'
+  posthogHost: 'https://us.posthog.com',   // leave blank for https://app.posthog.com
 };
