@@ -1306,9 +1306,9 @@ function showSettings() {
 function settingsPartnerLinkRow() {
   var token  = DB.get('navya_partner_token', null);
   var origin = (typeof location !== 'undefined') ? location.origin + location.pathname.replace(/[^/]*$/, '') : '';
-  var link   = token ? origin + 'partner.html?token=' + token : null;
+  var link   = token ? origin + 'partner?token=' + token : null;
   return '<div style="margin-top:.875rem;display:flex;flex-direction:column;gap:.5rem;">' +
-    '<a class="settings-partner-link" href="partner.html" target="_blank" rel="noopener">' +
+    '<a class="settings-partner-link" href="partner" target="_blank" rel="noopener">' +
       '<span class="material-symbols-outlined">open_in_new</span> Open partner view (same device)' +
     '</a>' +
     (link
