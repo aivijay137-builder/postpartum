@@ -2184,6 +2184,7 @@ a, button {
   margin-top: 1rem; transition: opacity .2s, transform .15s;
 }
 .ci-save-btn:active { transform: scale(.97); }
+.ci-save-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
 
 /* ─── NOTES LOG SCREEN ───────────────────────────────────────── */
 .note-timeline { display: flex; flex-direction: column; gap: .875rem; }

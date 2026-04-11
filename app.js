@@ -695,6 +695,10 @@ function ciVoiceStop() {
 }
 
 function ciSave() {
+  // Disable button immediately to prevent double-tap
+  var saveBtn = document.querySelector('.ci-save-btn');
+  if (saveBtn) saveBtn.disabled = true;
+
   var textarea = document.getElementById('ci-note');
   if (textarea) _ciState.note = textarea.value;
 
@@ -712,35 +716,46 @@ function ciSave() {
     saved_at:         new Date().toISOString(),
   };
 
-  function afterSave(rec) {
-    DB.saveCheckin(today, rec);
-    if (window.SB && SB.isReady() && _currentUserId) {
-      SB.saveCheckin(_currentUserId, rec).catch(function(){});
+  function doSave(rec) {
+    // localStorage save — DB.set returns false and shows its own toast on failure
+    var saved = DB.saveCheckin(today, rec);
+    if (!saved) {
+      // Storage failed — re-enable button so user can retry
+      if (saveBtn) saveBtn.disabled = false;
+      return;
     }
+
+    // Supabase sync (best-effort, errors logged but not shown)
+    if (window.SB && SB.isReady() && _currentUserId) {
+      SB.saveCheckin(_currentUserId, rec).catch(function(e) {
+        console.warn('[Navya] Supabase checkin sync failed:', e);
+      });
+    }
+
+    if (window.PH) PH.capture('checkin_saved', {
+      day:           day,
+      mood:          _ciState.mood || null,
+      symptom_count: _ciState.symptoms.length,
+      has_note:      !!(rec.note_text && rec.note_text.trim()),
+      has_voice:     !!(rec.voice_transcript && rec.voice_transcript.trim()),
+    });
+
+    showToast('Check-in saved! Great work today.');
+    setTimeout(function() { navigate('#home'); }, 1200);
   }
 
   if (_voiceBlob) {
     var reader = new FileReader();
     reader.onloadend = function() {
       record.voice_b64 = reader.result;
-      afterSave(record);
+      doSave(record);
     };
     reader.readAsDataURL(_voiceBlob);
+    _voiceBlob = null;
   } else {
-    afterSave(record);
+    _voiceBlob = null;
+    doSave(record);
   }
-
-  _voiceBlob = null;
-  if (window.PH) PH.capture('checkin_saved', {
-    day:           day,
-    mood:          _ciState.mood || null,
-    symptom_count: _ciState.symptoms.length,
-    symptoms:      _ciState.symptoms,
-    has_note:      !!(_ciState.note && _ciState.note.trim()),
-    has_voice:     !!(_ciState.voiceText && _ciState.voiceText.trim()),
-  });
-  showToast('Check-in saved! Great work today.');
-  setTimeout(function() { navigate('#home'); }, 1200);
 }
 
 /* ─────────────────────────────────────────────────────────────
