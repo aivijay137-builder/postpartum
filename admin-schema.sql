@@ -54,6 +54,15 @@ begin
 end;
 $$;
 
--- ── Step 5: Grant admin access to set is_admin manually ──────
+-- ── Step 5: Backfill emails for existing users ────────────────
+-- Run once to copy emails from auth.users → profiles for all accounts
+-- that registered before the trigger was updated.
+update public.profiles p
+set email = u.email
+from auth.users u
+where p.id = u.id
+  and (p.email is null or p.email = '');
+
+-- ── Step 6: Grant admin access to set is_admin manually ───────
 -- Run this manually to promote a user to admin:
 --   update public.profiles set is_admin = true where email = 'your@email.com';

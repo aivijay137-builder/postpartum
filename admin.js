@@ -19,14 +19,45 @@ var MOOD_EMOJI  = { rough: '😔', tired: '😴', okay: '🙂', good: '😊', gr
 var MOOD_COLOR  = { rough: '#a73b21', tired: '#7d554f', okay: '#797c76', good: '#466743', great: '#274626' };
 
 var SYM_LABELS = {
-  'engorgement':                   { label: 'Breast engorgement',          severity: 'yellow' },
-  'cracked-nipples':               { label: 'Cracked / sore nipples',       severity: 'yellow' },
-  'cluster-feeding':               { label: 'Baby cluster feeding',         severity: 'green'  },
-  'low-milk-supply-concern':       { label: 'Worried about milk supply',    severity: 'yellow' },
-  'emotional-overwhelm-breastfeeding': { label: 'Tearful / overwhelmed',   severity: 'yellow' },
-  'mastitis-symptoms':             { label: 'Hot, red breast with fever',   severity: 'red'    },
-  'blocked-duct':                  { label: 'Tender lump in breast',        severity: 'yellow' },
-  'sleepy-baby-at-breast':         { label: 'Baby falling asleep at breast',severity: 'yellow' },
+  // Check-in symptoms
+  'engorgement':                       { label: 'Breast engorgement',           severity: 'yellow' },
+  'cracked-nipples':                   { label: 'Cracked / sore nipples',        severity: 'yellow' },
+  'cluster-feeding':                   { label: 'Baby cluster feeding',          severity: 'green'  },
+  'low-milk-supply-concern':           { label: 'Worried about milk supply',     severity: 'yellow' },
+  'emotional-overwhelm-breastfeeding': { label: 'Tearful / overwhelmed',         severity: 'yellow' },
+  'mastitis-symptoms':                 { label: 'Hot, red breast with fever',    severity: 'red'    },
+  'blocked-duct':                      { label: 'Tender lump in breast',         severity: 'yellow' },
+  'sleepy-baby-at-breast':             { label: 'Baby falling asleep at breast', severity: 'yellow' },
+  // Guide card slugs — breastfeeding
+  'shallow-latch-pain':                { label: 'Shallow latch / nursing pain',  severity: 'yellow' },
+  'baby-not-gaining-weight':           { label: 'Baby not gaining weight',       severity: 'red'    },
+  'overactive-letdown':                { label: 'Overactive letdown',            severity: 'yellow' },
+  'nipple-bleb':                       { label: 'Nipple bleb / milk blister',    severity: 'yellow' },
+  'flat-inverted-nipples':             { label: 'Flat or inverted nipples',      severity: 'yellow' },
+  'baby-refusing-breast':              { label: 'Baby refusing breast',          severity: 'yellow' },
+  'fast-letdown-choking':              { label: 'Fast letdown / baby choking',   severity: 'yellow' },
+  'pumping-pain':                      { label: 'Pumping pain',                  severity: 'yellow' },
+  'combination-feeding-confusion':     { label: 'Combination feeding confusion', severity: 'yellow' },
+  'bottle-preference':                 { label: 'Bottle preference',             severity: 'yellow' },
+  'night-time-engorgement':            { label: 'Night-time engorgement',        severity: 'yellow' },
+  'one-breast-producing-less':         { label: 'One breast producing less',     severity: 'yellow' },
+  'tongue-tie-concern':                { label: 'Tongue-tie concern',            severity: 'yellow' },
+  'thrush-nipple':                     { label: 'Nipple thrush',                 severity: 'red'    },
+  'gassy-baby-fussiness':              { label: 'Gassy baby / fussiness',        severity: 'yellow' },
+  'weaning-too-early-pressure':        { label: 'Pressure to wean early',        severity: 'green'  },
+  'anxiety-about-milk-intake':         { label: 'Anxiety about milk intake',     severity: 'yellow' },
+  // Guide card slugs — mental health & mom recovery
+  'baby-blues':                        { label: 'Baby blues',                    severity: 'green'  },
+  'postpartum-depression':             { label: 'Postpartum depression',         severity: 'red'    },
+  'afterpains':                        { label: 'Postpartum afterpains',         severity: 'yellow' },
+  'perineal-pain':                     { label: 'Perineal pain',                 severity: 'yellow' },
+  'postpartum-hair-loss':              { label: 'Postpartum hair loss',          severity: 'green'  },
+  'postpartum-constipation':           { label: 'Postpartum constipation',       severity: 'yellow' },
+  // Guide card slugs — baby health
+  'newborn-jaundice':                  { label: 'Newborn jaundice',              severity: 'yellow' },
+  'diaper-rash':                       { label: 'Diaper rash',                   severity: 'yellow' },
+  'baby-colic':                        { label: 'Baby colic',                    severity: 'yellow' },
+  'newborn-weight-loss':               { label: 'Newborn weight loss',           severity: 'yellow' },
 };
 
 /* ── Bootstrap ─────────────────────────────────────────────── */
@@ -259,13 +290,18 @@ function renderUserRows(profiles, q) {
     var badges = [];
     if (p.is_admin) badges.push('<span class="adm-pill adm-pill-green" style="font-size:.625rem;">Admin</span>');
     if (p.is_guest) badges.push('<span class="adm-pill adm-pill-grey"  style="font-size:.625rem;">Guest</span>');
-    var subLabel = badges.length
-      ? badges.join(' ')
-      : '<span style="color:#797c76;">' + esc(p.email||'') + '</span>';
+
+    // Display name: show email as primary if name is still the default
+    var displayName = (p.mom_name && p.mom_name !== 'Mama') ? p.mom_name : (p.email ? p.email.split('@')[0] : 'Unknown');
+    // Sub-line: badges + email always
+    var emailSpan = p.email
+      ? '<span style="color:#797c76;">' + esc(p.email) + '</span>'
+      : '<span style="color:#bbb;font-style:italic;">no email</span>';
+    var subLabel = (badges.length ? badges.join(' ') + '&ensp;' : '') + emailSpan;
 
     return '<tr class="clickable" onclick="showUserDetail(\'' + p.id + '\')">' +
       '<td><div class="adm-name-cell"><div class="adm-avatar ' + (isRose?'adm-avatar-rose':'') + '">' + esc(initial) + '</div>' +
-        '<div><div style="font-weight:700;font-size:.875rem;">' + esc(p.mom_name||'Unknown') + '</div>' +
+        '<div><div style="font-weight:700;font-size:.875rem;">' + esc(displayName) + '</div>' +
         '<div style="font-size:.6875rem;margin-top:.1rem;">' + subLabel + '</div></div></div></td>' +
       '<td>' + (day ? '<span class="adm-pill adm-pill-grey">Day ' + day + '</span>' : '—') + '</td>' +
       '<td>' + (lastCI ? formatDate(lastCI.date) : '<span style="color:#797c76;">Never</span>') + '</td>' +
@@ -357,7 +393,8 @@ function showUserDetail(uid) {
   if (!profile) return;
 
   var day     = dayFromBirth(profile.birth_date);
-  var initial = (profile.mom_name||'M')[0].toUpperCase();
+  var displayName = (profile.mom_name && profile.mom_name !== 'Mama') ? profile.mom_name : (profile.email ? profile.email.split('@')[0] : 'Unknown');
+  var initial = displayName[0].toUpperCase();
   var avgM    = avgMoodScore(userCIs);
   var streak  = calcStreak(userCIs);
   var resolvedCount = userTracks.filter(function(t){return t.status==='resolved';}).length;
@@ -402,10 +439,11 @@ function showUserDetail(uid) {
     '<div class="adm-user-hero">' +
       '<div class="adm-user-hero-avatar">' + esc(initial) + '</div>' +
       '<div style="flex:1;">' +
-        '<div class="adm-user-hero-name">' + esc(profile.mom_name||'Unknown') + '</div>' +
+        '<div class="adm-user-hero-name">' + esc(displayName) + '</div>' +
         '<div class="adm-user-hero-meta">' +
           (profile.is_admin ? '<span class="adm-pill adm-pill-green" style="margin-right:.375rem;">Admin</span>' : '') +
-          (profile.is_guest ? '<span class="adm-pill adm-pill-grey"  style="margin-right:.375rem;">Guest</span>' : (!profile.is_admin ? esc(profile.email||'') + ' · ' : '')) +
+          (profile.is_guest ? '<span class="adm-pill adm-pill-grey"  style="margin-right:.375rem;">Guest</span>' : '') +
+          (profile.email ? esc(profile.email) + ' · ' : '') +
           esc(profile.delivery_type==='csection'?'C-section':'Normal delivery') + ' · ' + (day?'Day '+day:'Day ?') +
         '</div>' +
         '<div class="adm-detail-chips">' +

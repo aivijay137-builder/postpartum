@@ -1719,8 +1719,11 @@ function onLoggedIn(user, isGuest) {
       if (!profile || !profile.birth_date) {
         localStorage.removeItem('navya_onboarded');
       }
-      if (isGuest) {
-        SB.saveProfile(user.id, { is_guest: true });
+      var profilePatch = {};
+      if (user.email) profilePatch.email = user.email;
+      if (isGuest)    profilePatch.is_guest = true;
+      if (Object.keys(profilePatch).length) {
+        SB.saveProfile(user.id, profilePatch).catch(function(){});
       }
       initApp();
     }).catch(function () { initApp(); });
