@@ -34,10 +34,51 @@ var PDB = {
   getNote: function(isoDate) {
     return PDB.get('navya_partner_note_' + isoDate, null);
   },
+  // getMomCheckin and getAllCheckins defined below getProfile (use pRemoteCheckins if available)
+  getProfile: function() {
+    if (pRemoteProfile) {
+      return {
+        momName:     pRemoteProfile.mom_name     || 'Mama',
+        partnerPIN:  '__token__',                // token = authenticated, skip PIN check
+        partnerName: pRemoteProfile.partner_name || 'Partner',
+        birthDate:   pRemoteProfile.birth_date   || null,
+      };
+    }
+    return {
+      momName:      PDB.get('navya_mom_name', 'Mama'),
+      partnerPIN:   PDB.get('navya_partner_pin', null),
+      partnerName:  PDB.get('navya_partner_name', 'Partner'),
+      birthDate:    PDB.get('navya_birth_date', null),
+    };
+  },
   getMomCheckin: function(isoDate) {
+    if (pRemoteCheckins.length) {
+      var row = pRemoteCheckins.find(function(c) { return c.date === isoDate; });
+      if (!row) return null;
+      return {
+        date:             row.date,
+        day:              row.day_number,
+        mood:             row.mood,
+        symptoms:         row.symptoms   || [],
+        note_text:        row.note_text,
+        voice_transcript: row.voice_transcript,
+      };
+    }
     return PDB.get('navya_checkin_' + isoDate, null);
   },
   getAllCheckins: function() {
+    if (pRemoteCheckins.length) {
+      return pRemoteCheckins.map(function(row) {
+        return {
+          date:     row.date,
+          day:      row.day_number,
+          mood:     row.mood,
+          symptoms: row.symptoms || [],
+          note_text: row.note_text,
+          voice_transcript: row.voice_transcript,
+        };
+      }).sort(function(a, b) { return b.date > a.date ? 1 : -1; });
+    }
     var result = [];
     for (var i = 0; i < localStorage.length; i++) {
       var key = localStorage.key(i);
@@ -48,19 +89,14 @@ var PDB = {
     }
     return result.sort(function(a, b) { return b.date > a.date ? 1 : -1; });
   },
-  getProfile: function() {
-    return {
-      momName:      PDB.get('navya_mom_name', 'Mama'),
-      partnerPIN:   PDB.get('navya_partner_pin', null),
-      partnerName:  PDB.get('navya_partner_name', 'Partner'),
-      birthDate:    PDB.get('navya_birth_date', null),
-    };
-  },
 };
 
 /* ─── STATE ─────────────────────────────────────────────────── */
 var pAuthenticated = false;
 var pCurrentScreen = 'pin';
+// Populated when partner opens shareable ?token= link via Supabase
+var pRemoteProfile  = null;   // { id, mom_name, birth_date, delivery_type, partner_name }
+var pRemoteCheckins = [];     // array of checkin rows from Supabase
 
 var MOODS = [
   { key: 'rough', emoji: '😔', label: 'Rough' },
@@ -413,6 +449,49 @@ function pSaveNote() {
 
 document.addEventListener('DOMContentLoaded', function() {
   var nav = document.querySelector('.nav-bottom');
-  if (nav) nav.style.display = 'none'; // hidden until authenticated
-  pShowPIN();
+  if (nav) nav.style.display = 'none';
+
+  // Check for ?token= shareable link (Supabase-based access from any device)
+  var urlToken = (new URLSearchParams(window.location.search)).get('token');
+
+  if (urlToken && window.SB && SB.isReady()) {
+    pSetContent(
+      '<div style="display:flex;align-items:center;justify-content:center;height:60vh;flex-direction:column;gap:.75rem;">' +
+      '<span class="material-symbols-outlined" style="font-size:2rem;color:var(--primary-container);animation:spin 1s linear infinite;">refresh</span>' +
+      '<p style="font-size:.875rem;color:var(--on-surface-var);">Loading\u2026</p>' +
+      '</div>'
+    );
+    SB.getProfileByToken(urlToken).then(function(profile) {
+      if (!profile) {
+        pSetContent(
+          '<div class="pin-wrap">' +
+          '<div class="pin-icon"><span class="material-symbols-outlined">link_off</span></div>' +
+          '<h2 class="pin-title">Link not found</h2>' +
+          '<p class="pin-sub">This partner link is invalid or has been reset. Ask mama to share a new link from Settings.</p>' +
+          '</div>'
+        );
+        return;
+      }
+      pRemoteProfile = profile;
+      return SB.getCheckinsByUserId(profile.id).then(function(checkins) {
+        pRemoteCheckins = checkins || [];
+        pAuthenticated  = true;
+        if (nav) nav.style.display = '';
+        var topName = document.getElementById('partner-top-name');
+        if (topName) topName.textContent = (profile.partner_name || 'Partner') + '\'s view';
+        pNavigate('today');
+      });
+    }).catch(function() {
+      pSetContent(
+        '<div class="pin-wrap">' +
+        '<div class="pin-icon"><span class="material-symbols-outlined">wifi_off</span></div>' +
+        '<h2 class="pin-title">Could not connect</h2>' +
+        '<p class="pin-sub">Check your internet connection and try again.</p>' +
+        '</div>'
+      );
+    });
+  } else {
+    // Same-device PIN-based access (or Supabase not configured)
+    pShowPIN();
+  }
 });
