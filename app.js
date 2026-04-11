@@ -173,6 +173,11 @@ function route(hash) {
     case 'settings':   showSettings();                                  break;
     default:           showHome();
   }
+
+  // Analytics: screen view (skip login/onboarding noise)
+  if (window.PH && base !== 'login' && base !== 'onboarding') {
+    PH.screen(base === 'symptom' ? 'guide_detail' : base, param ? { slug: param } : undefined);
+  }
 }
 
 window.addEventListener('hashchange', function() { route(location.hash); });
@@ -400,6 +405,11 @@ function obFinish() {
 
   var finishNav = function() {
     DB.set('navya_onboarded', true);
+    if (window.PH) PH.capture('onboarding_completed', {
+      delivery_type: obData.deliveryType || 'vaginal',
+      has_partner:   !!(obData.partnerName && obData.partnerName.trim()),
+      notifs_opted:  obData.notifs === 'yes',
+    });
     navigate('#home');
   };
 
@@ -721,6 +731,14 @@ function ciSave() {
   }
 
   _voiceBlob = null;
+  if (window.PH) PH.capture('checkin_saved', {
+    day:           day,
+    mood:          _ciState.mood || null,
+    symptom_count: _ciState.symptoms.length,
+    symptoms:      _ciState.symptoms,
+    has_note:      !!(_ciState.note && _ciState.note.trim()),
+    has_voice:     !!(_ciState.voiceText && _ciState.voiceText.trim()),
+  });
   showToast('Check-in saved! Great work today.');
   setTimeout(function() { navigate('#home'); }, 1200);
 }
@@ -901,6 +919,7 @@ function symptomMarkResolved(slug) {
   track.note           = noteEl ? noteEl.value.trim() : track.note;
   DB.saveSymptomTrack(slug, track);
   if (window.SB && SB.isReady() && _currentUserId) { SB.saveSymptomTrack(_currentUserId, track).catch(function(){}); }
+  if (window.PH) PH.capture('symptom_resolved', { slug: slug, days_to_resolve: track.days_to_resolve });
   showSymptomDetail(slug);
   showToast('Marked as resolved in ' + track.days_to_resolve + ' day' + (track.days_to_resolve !== 1 ? 's' : '') + '.');
 }
@@ -1671,6 +1690,7 @@ function authSubmit() {
     }
     var user = result && result.data && result.data.user;
     if (user) {
+      if (window.PH) PH.capture(_authMode === 'signup' ? 'signed_up' : 'signed_in', { method: 'email' });
       onLoggedIn(user);
     } else if (_authMode === 'signup') {
       if (errEl) { errEl.textContent = 'Account created — check your email to confirm, then sign in.'; errEl.style.display = ''; }
@@ -1689,9 +1709,11 @@ function skipLogin() {
     SB.signInAnonymously().then(function (result) {
       var user = result && result.data && result.data.user;
       if (user) {
+        if (window.PH) PH.capture('signed_in', { method: 'guest' });
         onLoggedIn(user, true);
       } else {
         // anon auth not enabled — fallback offline
+        if (window.PH) PH.capture('signed_in', { method: 'offline_guest' });
         localStorage.setItem('navya_skip_login', '1');
         initApp();
       }
@@ -1725,6 +1747,9 @@ function onLoggedIn(user, isGuest) {
       if (Object.keys(profilePatch).length) {
         SB.saveProfile(user.id, profilePatch).catch(function(){});
       }
+      if (window.PH) {
+        PH.identify(user.id, user.email ? { email: user.email, is_guest: !!isGuest } : { is_guest: !!isGuest });
+      }
       initApp();
     }).catch(function () { initApp(); });
   });
@@ -1732,6 +1757,7 @@ function onLoggedIn(user, isGuest) {
 
 function authLogout() {
   if (window.SB && SB.isReady()) SB.signOut();
+  if (window.PH) PH.reset();
   _currentUserId = null;
   localStorage.removeItem('navya_user_id');
   localStorage.removeItem('navya_skip_login');
