@@ -6,7 +6,7 @@
  *
  * PostHog (optional):
  *   posthogKey  — Project API key from posthog.com → Project Settings → API keys
- *   posthogHost — 'https://app.posthog.com' (US) or 'https://eu.posthog.com' (EU)
+ *   posthogHost — 'https://us.i.posthog.com' (US) or 'https://eu.i.posthog.com' (EU)
  *                 Leave blank to default to US cloud.
  */
 window.NAVYA_CONFIG = {
@@ -14,5 +14,5 @@ window.NAVYA_CONFIG = {
   supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vdHNjY210d2RhcWRoaGlyZG56Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4NDI1MDcsImV4cCI6MjA5MTQxODUwN30.zD0Ux_mj0BpE-SfRheJr3dSsng607r2b1VJMArYE5RQ',
 
   posthogKey:  'phc_Bz4Brt2tSUsxyi2Gc2Fmu8pcqMhaiRAxtnWtCoRNsPdi',   // e.g. 'phc_XXXXXXXXXXXXXXXXXXXX'
-  posthogHost: 'https://us.posthog.com',   // leave blank for https://app.posthog.com
+  posthogHost: 'https://us.i.posthog.com',  // US cloud (use https://eu.i.posthog.com for EU)
 };
