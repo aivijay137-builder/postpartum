@@ -1271,6 +1271,70 @@ a, button {
   margin: 1.5rem 0 0.75rem;
 }
 
+/* ── Meal plan home — today summary card ────────────────────── */
+.today-summary {
+  background: var(--surface-white, #fff);
+  border-radius: var(--radius-card, .875rem);
+  padding: 1.125rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(48,51,47,.06);
+}
+
+.ts-label {
+  font-size: .625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--primary);
+  margin-bottom: .25rem;
+}
+
+.ts-h2 {
+  font-family: var(--font-head, 'Noto Serif', serif);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--on-surface);
+  margin-bottom: .125rem;
+  line-height: 1.3;
+}
+
+.ts-theme {
+  font-size: .8125rem;
+  color: var(--on-surface-var, #797c76);
+  margin-bottom: .875rem;
+  line-height: 1.45;
+}
+
+.meal-preview-row {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-bottom: .875rem;
+}
+
+.meal-preview-item {
+  display: flex;
+  align-items: baseline;
+  gap: .625rem;
+}
+
+.mp-label {
+  font-size: .5625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--primary);
+  flex-shrink: 0;
+  width: 58px;
+}
+
+.mp-name {
+  font-size: .8125rem;
+  color: var(--on-surface);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
 .phase-card-list {
   display: flex;
   flex-direction: column;
