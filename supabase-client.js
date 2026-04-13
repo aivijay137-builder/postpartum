@@ -49,7 +49,7 @@
     /* ── PROFILE ────────────────────────────────────────────── */
     saveProfile: function (uid, data) {
       if (!ok || !uid) return noop();
-      return _cli.from('profiles').upsert(Object.assign({ id: uid }, data));
+      return Promise.resolve(_cli.from('profiles').upsert(Object.assign({ id: uid }, data)));
     },
     loadProfile: function (uid) {
       if (!ok || !uid) return Promise.resolve(null);
@@ -75,7 +75,7 @@
         note_text:        data.note_text || null,
         voice_transcript: data.voice_transcript || null,
       };
-      return _cli.from('checkins').upsert(row, { onConflict: 'user_id,date' });
+      return Promise.resolve(_cli.from('checkins').upsert(row, { onConflict: 'user_id,date' }));
     },
     loadCheckins: function (uid) {
       if (!ok || !uid) return Promise.resolve([]);
@@ -87,10 +87,10 @@
     /* ── SYMPTOM TRACKS ─────────────────────────────────────── */
     saveSymptomTrack: function (uid, data) {
       if (!ok || !uid) return noop();
-      return _cli.from('symptom_tracks').upsert(
+      return Promise.resolve(_cli.from('symptom_tracks').upsert(
         Object.assign({ user_id: uid }, data),
         { onConflict: 'user_id,slug' }
-      );
+      ));
     },
     loadSymptomTracks: function (uid) {
       if (!ok || !uid) return Promise.resolve([]);
@@ -101,7 +101,7 @@
     /* ── GUIDE VIEWS (analytics) ────────────────────────────── */
     logGuideView: function (uid, slug) {
       if (!ok || !uid) return noop();
-      return _cli.from('guide_views').insert({ user_id: uid, slug: slug });
+      return Promise.resolve(_cli.from('guide_views').insert({ user_id: uid, slug: slug }));
     },
 
     /* ── PARTNER (read-only via share token) ────────────────── */
