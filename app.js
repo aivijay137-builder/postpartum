@@ -537,7 +537,7 @@ function showCheckin() {
       DB.saveCheckin(today, {
         date:              today,
         day:               day,
-        symptoms:          (remote.daily_checkin_symptoms || []).map(function(s) { return s.symptom_slug; }),
+        symptoms:          (remote.symptoms || []).map(function(s) { return s.slug; }),
         mood:              remote.mood,
         note_text:         remote.note_text,
         voice_transcript:  remote.voice_transcript,
@@ -863,6 +863,9 @@ async function ciSave() {
   };
   DB.saveCheckin(today, localRecord);
 
+  // Compute and store partner recommendation based on symptoms + mood
+  _computeAndSavePartnerRecommendation(_ciState.symptoms.slice(), _ciState.mood, today);
+
   // Save to Supabase
   if (window._supabaseClient) {
     try {
@@ -885,8 +888,11 @@ async function ciSave() {
           '<span class="material-symbols-outlined" style="font-size:1rem;">check_circle</span>' +
           ' Save today\'s log';
       }
-      showToast('Saved locally. Cloud sync failed \u2014 will retry on next save.');
-      setTimeout(function() { navigate('#home'); }, 2200);
+      var errMsg = (err && (err.message || err.details || err.code))
+        ? ' (' + (err.message || err.code) + ')'
+        : '';
+      showToast('Cloud sync failed' + errMsg + '. Saved locally.');
+      setTimeout(function() { navigate('#home'); }, 3000);
       return;
     }
   }
@@ -897,6 +903,56 @@ async function ciSave() {
 
   showToast('Check-in saved! Great work today. \u2728');
   setTimeout(function() { navigate('#home'); }, 1200);
+}
+
+// ── _computeAndSavePartnerRecommendation ─────────────────────
+// Fetches the partner_recommendations table from the dataset,
+// scores every entry against the current symptoms + mood,
+// and persists the best match to navya_partner_rec_{date}.
+function _computeAndSavePartnerRecommendation(symptoms, mood, date) {
+  fetch('./navya_partner_sync_dataset.json')
+    .then(function(r) { return r.json(); })
+    .then(function(dataset) {
+      var recs = dataset.partner_recommendations || [];
+      if (!recs.length) return;
+
+      var best = null;
+      var bestScore = -1;
+
+      recs.forEach(function(rec) {
+        // +2 for every matched symptom slug
+        var symScore = 0;
+        (rec.match_symptoms || []).forEach(function(slug) {
+          if (symptoms.indexOf(slug) > -1) symScore += 2;
+        });
+        // +1 if mood is in the rec's match_moods list
+        var moodScore = (rec.match_moods || []).indexOf(mood) > -1 ? 1 : 0;
+        var score = symScore + moodScore;
+
+        if (score > bestScore) {
+          bestScore = score;
+          best = rec;
+        }
+      });
+
+      if (!best || bestScore < 1) return; // nothing relevant matched
+
+      try {
+        localStorage.setItem('navya_partner_rec_' + date, JSON.stringify({
+          date:        date,
+          rec_id:      best.id,
+          priority:    best.priority,
+          headline:    best.headline,
+          icon:        best.icon,
+          color_key:   best.color_key,
+          summary:     best.summary,
+          actions:     best.actions,
+          what_to_say: best.what_to_say,
+          computed_at: new Date().toISOString(),
+        }));
+      } catch(e) { /* storage full — recommendation not critical */ }
+    })
+    .catch(function() { /* dataset unavailable — skip silently */ });
 }
 
 /* ─────────────────────────────────────────────────────────────
