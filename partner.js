@@ -56,6 +56,9 @@ var PDB = {
       birthDate:    PDB.get('navya_birth_date', null),
     };
   },
+  getPartnerRec: function(isoDate) {
+    return PDB.get('navya_partner_rec_' + isoDate, null);
+  },
 };
 
 /* ─── STATE ─────────────────────────────────────────────────── */
@@ -223,12 +226,59 @@ function pVerifyPIN() {
 
 /* ─── SCREEN: TODAY'S SUMMARY ───────────────────────────────── */
 
+function pBuildRecCard(rec) {
+  if (!rec) return '';
+
+  // Accent color based on color_key
+  var accentBorder = 'var(--primary)';
+  var accentBg     = 'rgba(var(--primary-rgb, 180,90,120),.07)';
+  var iconColor    = 'var(--primary)';
+  if (rec.color_key === 'red') {
+    accentBorder = 'var(--error)';
+    accentBg     = 'rgba(253,121,90,.07)';
+    iconColor    = 'var(--error)';
+  } else if (rec.color_key === 'secondary') {
+    accentBorder = 'var(--secondary)';
+    accentBg     = 'rgba(var(--secondary-rgb, 120,90,160),.07)';
+    iconColor    = 'var(--secondary)';
+  } else if (rec.color_key === 'green') {
+    accentBorder = '#2e7d32';
+    accentBg     = 'rgba(46,125,50,.07)';
+    iconColor    = '#2e7d32';
+  }
+
+  var actionsHtml = (rec.actions || []).map(function(a) {
+    return '<li style="display:flex;gap:.5rem;align-items:flex-start;padding:.375rem 0;border-bottom:1px solid rgba(0,0,0,.04);">' +
+      '<span class="material-symbols-outlined" style="font-size:.875rem;color:' + iconColor + ';flex-shrink:0;margin-top:.15rem;">check_small</span>' +
+      '<span style="font-size:.875rem;color:var(--on-surface);line-height:1.55;">' + pEsc(a) + '</span>' +
+    '</li>';
+  }).join('');
+
+  var sayHtml = rec.what_to_say
+    ? '<div style="margin-top:.75rem;padding:.625rem .75rem;background:rgba(0,0,0,.03);border-radius:.5rem;">' +
+        '<p style="font-size:.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--on-surface-var);margin-bottom:.25rem;">What to say</p>' +
+        '<p style="font-size:.875rem;color:var(--on-surface);line-height:1.55;font-style:italic;">' + pEsc(rec.what_to_say) + '</p>' +
+      '</div>'
+    : '';
+
+  return '<div style="background:' + accentBg + ';border-left:3px solid ' + accentBorder + ';border-radius:.75rem;padding:1rem;margin-bottom:1.125rem;">' +
+    '<div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;">' +
+      '<span class="material-symbols-outlined" style="color:' + iconColor + ';font-size:1.125rem;">' + pEsc(rec.icon || 'tips_and_updates') + '</span>' +
+      '<p style="font-size:.9375rem;font-weight:700;color:var(--on-surface);line-height:1.3;">' + pEsc(rec.headline) + '</p>' +
+    '</div>' +
+    '<p style="font-size:.8125rem;color:var(--on-surface-var);line-height:1.55;margin-bottom:.625rem;">' + pEsc(rec.summary) + '</p>' +
+    '<ul style="list-style:none;">' + actionsHtml + '</ul>' +
+    sayHtml +
+  '</div>';
+}
+
 function pShowToday() {
   var profile  = PDB.getProfile();
   var today    = pGetTodayISO();
   var day      = pGetCurrentDay(profile.birthDate);
   var checkin  = PDB.getMomCheckin(today);
   var pNote    = PDB.getNote(today);
+  var rec      = PDB.getPartnerRec(today);
 
   var mood = checkin && checkin.mood ? MOODS.find(function(m) { return m.key === checkin.mood; }) : null;
 
@@ -273,6 +323,8 @@ function pShowToday() {
         '<span class="material-symbols-outlined" style="font-size:1rem;">edit_note</span> Add note for today' +
       '</button>';
 
+  var recCardHtml = checkin ? pBuildRecCard(rec) : '';
+
   pSetContent(
     '<div>' +
     '<div class="partner-banner"><span class="material-symbols-outlined">visibility</span>Read-only view — you can\'t edit ' + pEsc(profile.momName) + '\'s data</div>' +
@@ -287,6 +339,8 @@ function pShowToday() {
           sympHtml + noteHtml + voiceHtml
         : '<p class="psc-no-data">No check-in logged yet today.</p>') +
     '</div>' +
+
+    recCardHtml +
 
     partnerNoteHtml +
 

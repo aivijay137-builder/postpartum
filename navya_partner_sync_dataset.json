@@ -1,0 +1,326 @@
+{
+  "_meta": {
+    "schema_version": "1.0",
+    "app": "Navya",
+    "description": "Sample partner sync dataset — illustrates the data shape exchanged between mom's device and partner's device. Keys map directly to localStorage keys used by app.js and partner.js.",
+    "generated": "2026-04-14",
+    "birth_date": "2026-04-07",
+    "days_covered": 7
+  },
+
+  "profile": {
+    "navya_mom_name": "Priya",
+    "navya_partner_name": "Arjun",
+    "navya_partner_pin": "2847",
+    "navya_birth_date": "2026-04-07"
+  },
+
+  "checkins": [
+    {
+      "_key": "navya_checkin_2026-04-07",
+      "date": "2026-04-07",
+      "day": 1,
+      "mood": "tired",
+      "symptoms": [],
+      "note_text": "Baby arrived. Exhausted but she latched on the very first try. Colostrum coming through.",
+      "voice_transcript": null,
+      "voice_note_url": null,
+      "saved_at": "2026-04-07T21:14:00.000Z"
+    },
+    {
+      "_key": "navya_checkin_2026-04-08",
+      "date": "2026-04-08",
+      "day": 2,
+      "mood": "okay",
+      "symptoms": ["sleepy-baby-at-breast"],
+      "note_text": "Baby keeps falling asleep mid-feed. Tickling her feet helps a bit. Skin-to-skin all morning.",
+      "voice_transcript": "She's sleepy but feeds are going okay. Trying to keep her awake.",
+      "voice_note_url": null,
+      "saved_at": "2026-04-08T19:47:00.000Z"
+    },
+    {
+      "_key": "navya_checkin_2026-04-09",
+      "date": "2026-04-09",
+      "day": 3,
+      "mood": "rough",
+      "symptoms": ["engorgement", "emotional-overwhelm-breastfeeding"],
+      "note_text": "Milk came in hard. Breasts feel like rocks. Cried twice today — not sure why exactly. Just overwhelmed.",
+      "voice_transcript": "I feel so full and it hurts. Baby is struggling to latch when I'm this engorged.",
+      "voice_note_url": null,
+      "saved_at": "2026-04-09T20:03:00.000Z"
+    },
+    {
+      "_key": "navya_checkin_2026-04-10",
+      "date": "2026-04-10",
+      "day": 4,
+      "mood": "okay",
+      "symptoms": ["engorgement", "cracked-nipples"],
+      "note_text": "Engorgement a bit better after reverse pressure softening. Nipples very sore though. Using lanolin.",
+      "voice_transcript": null,
+      "voice_note_url": null,
+      "saved_at": "2026-04-10T18:30:00.000Z"
+    },
+    {
+      "_key": "navya_checkin_2026-04-11",
+      "date": "2026-04-11",
+      "day": 5,
+      "mood": "okay",
+      "symptoms": ["cluster-feeding"],
+      "note_text": "Baby cluster feeding from 5pm to 9pm. Growth spurt? I barely moved from the couch. Drank 3 glasses of water.",
+      "voice_transcript": "She fed for four hours straight this evening. My arms are tired but she seems satisfied now.",
+      "voice_note_url": null,
+      "saved_at": "2026-04-11T21:55:00.000Z"
+    },
+    {
+      "_key": "navya_checkin_2026-04-12",
+      "date": "2026-04-12",
+      "day": 6,
+      "mood": "good",
+      "symptoms": ["cracked-nipples"],
+      "note_text": "Best night so far — 3 hour stretch at 1am. Nipples still sore but latch felt deeper today. Positive.",
+      "voice_transcript": null,
+      "voice_note_url": null,
+      "saved_at": "2026-04-12T17:10:00.000Z"
+    },
+    {
+      "_key": "navya_checkin_2026-04-13",
+      "date": "2026-04-13",
+      "day": 7,
+      "mood": "good",
+      "symptoms": [],
+      "note_text": "One week! Engorgement gone. Latch is so much better. Baby back above birth weight at check-up.",
+      "voice_transcript": "Doctor said she's doing great. Weight is back up. I feel more confident today.",
+      "voice_note_url": null,
+      "saved_at": "2026-04-13T16:40:00.000Z"
+    }
+  ],
+
+  "partner_notes": [
+    {
+      "_key": "navya_partner_note_2026-04-07",
+      "date": "2026-04-07",
+      "note": "She was incredible today. Took the baby the moment visiting hours ended so she could sleep. Couldn't believe how calm she stayed during labour.",
+      "saved_at": "2026-04-07T23:00:00.000Z"
+    },
+    {
+      "_key": "navya_partner_note_2026-04-08",
+      "date": "2026-04-08",
+      "note": "Brought home from hospital. Made moong dal khichdi per the app. She ate well. Baby had 8 feeds.",
+      "saved_at": "2026-04-08T22:15:00.000Z"
+    },
+    {
+      "_key": "navya_partner_note_2026-04-09",
+      "date": "2026-04-09",
+      "note": "Hard day — milk came in and she was really struggling. I took the baby for a walk at 8pm so she could shower and rest. Reminded her she's doing amazingly.",
+      "saved_at": "2026-04-09T22:30:00.000Z"
+    },
+    {
+      "_key": "navya_partner_note_2026-04-10",
+      "date": "2026-04-10",
+      "note": "Picked up lanolin and extra breast pads. Made sure she had warm soup at lunch and dinner. She seemed calmer this evening.",
+      "saved_at": "2026-04-10T21:00:00.000Z"
+    },
+    {
+      "_key": "navya_partner_note_2026-04-11",
+      "date": "2026-04-11",
+      "note": "Cluster feeding evening — I stayed right beside her with water and snacks. Took baby for morning carry so she slept 90 mins uninterrupted.",
+      "saved_at": "2026-04-11T23:10:00.000Z"
+    },
+    {
+      "_key": "navya_partner_note_2026-04-12",
+      "date": "2026-04-12",
+      "note": "She had a decent night! 3 hour block. Mood visibly better in the morning. I handled the 6am feed so she could sleep to 8.",
+      "saved_at": "2026-04-12T20:00:00.000Z"
+    },
+    {
+      "_key": "navya_partner_note_2026-04-13",
+      "date": "2026-04-13",
+      "note": "One week! Doctor visit went well. Baby above birth weight. Priya is so much more confident. Celebrated with her favourite gulab jamun.",
+      "saved_at": "2026-04-13T19:45:00.000Z"
+    }
+  ],
+
+  "partner_recommendations": [
+    {
+      "id": "rec_mastitis_urgent",
+      "priority": "urgent",
+      "match_symptoms": ["mastitis-symptoms"],
+      "match_moods": [],
+      "headline": "She may need a doctor today",
+      "icon": "emergency",
+      "color_key": "red",
+      "summary": "She's flagged a symptom that can signal mastitis — a breast infection that needs prompt treatment. Don't wait to see if it improves on its own.",
+      "actions": [
+        "Gently ask if she has fever, chills, or a hot red patch on her breast",
+        "If yes, help arrange a same-day doctor call or visit — mastitis needs antibiotics quickly",
+        "Keep the baby breastfeeding as normal — stopping feeding can make the infection worse",
+        "Prepare warm compresses and ensure she's drinking water constantly"
+      ],
+      "what_to_say": "\"I'm right here. Let's call the doctor together — getting help fast is the right thing to do.\""
+    },
+    {
+      "id": "rec_engorgement_blocked_duct",
+      "priority": "high",
+      "match_symptoms": ["engorgement", "blocked-duct"],
+      "match_moods": ["rough", "tired"],
+      "headline": "She's in breast pain — act on this today",
+      "icon": "water_drop",
+      "color_key": "secondary",
+      "summary": "Engorgement or a blocked duct is very painful and can worsen into mastitis if not managed. Your practical support today matters.",
+      "actions": [
+        "Prepare a warm compress (damp warm cloth) — have it ready before feeds",
+        "After feeds, bring a cold pack or chilled cabbage leaf for 10 minutes to reduce swelling",
+        "Keep her well hydrated — dehydration makes engorgement worse",
+        "Don't let feeds get too far apart — frequent breastfeeding is the treatment",
+        "If a hard lump doesn't soften after 24 hours, suggest she call her doctor"
+      ],
+      "what_to_say": "\"I've got the warm cloth ready whenever you need it. Tell me when she's about to feed.\""
+    },
+    {
+      "id": "rec_overwhelm_rough",
+      "priority": "high",
+      "match_symptoms": ["emotional-overwhelm-breastfeeding"],
+      "match_moods": ["rough", "tired"],
+      "headline": "She's emotionally overwhelmed — your presence is the medicine",
+      "icon": "favorite",
+      "color_key": "primary",
+      "summary": "She's flagged feeling tearful or overwhelmed. This is very common in the first two weeks but your response right now shapes how she copes.",
+      "actions": [
+        "Take the baby for at least 30–60 minutes so she has unstructured time to herself",
+        "Don't try to fix it or offer advice — just sit close and say 'I see how hard you're working'",
+        "Make warm food and bring it without being asked — a small act that signals you're paying attention",
+        "Reduce noise, visitors, and stimulation in the house for the rest of the day"
+      ],
+      "what_to_say": "\"You don't have to hold it together right now. I've got the baby. Just rest.\""
+    },
+    {
+      "id": "rec_cracked_nipples",
+      "priority": "medium",
+      "match_symptoms": ["cracked-nipples"],
+      "match_moods": ["rough", "tired", "okay"],
+      "headline": "Sore nipples — small actions that make a real difference",
+      "icon": "healing",
+      "color_key": "secondary",
+      "summary": "Cracked nipples are one of the most common reasons moms stop breastfeeding early. A few things from you today can help her push through.",
+      "actions": [
+        "Check if there's lanolin cream at home — if not, pick some up today",
+        "After each feed, remind her to let a little milk air-dry on the nipple before covering",
+        "Help her find a comfortable feeding position — a nursing pillow reduces nipple strain",
+        "If pain is severe at every single feed, suggest booking a lactation consultant call"
+      ],
+      "what_to_say": "\"You're doing the hard part. I'll get the lanolin — just tell me where you last saw it.\""
+    },
+    {
+      "id": "rec_cluster_feeding",
+      "priority": "medium",
+      "match_symptoms": ["cluster-feeding"],
+      "match_moods": ["tired", "okay", "rough"],
+      "headline": "Cluster feeding tonight — set up her station and stay close",
+      "icon": "timer",
+      "color_key": "secondary",
+      "summary": "Cluster feeding is exhausting but completely normal — the baby is building up milk supply. Your role is to keep her fuelled, hydrated, and not alone.",
+      "actions": [
+        "Set up a feeding station: full water bottle, snack, phone charger, burp cloth — all within arm's reach",
+        "Take over all non-feeding tasks for the evening: nappy changes, settling, kitchen, everything",
+        "Cook or order warm food — she burns extra calories during marathon feeding sessions",
+        "Stay in the room. You don't need to talk — your presence stops her feeling isolated"
+      ],
+      "what_to_say": "\"Tell me what you need. I'm on everything else tonight — you just focus on feeding her.\""
+    },
+    {
+      "id": "rec_low_supply_worry",
+      "priority": "medium",
+      "match_symptoms": ["low-milk-supply-concern"],
+      "match_moods": ["rough", "tired", "okay"],
+      "headline": "She's worried about milk supply — stay calm and be practical",
+      "icon": "monitor_heart",
+      "color_key": "primary",
+      "summary": "Supply worry is common and often unfounded, but the anxiety itself can reduce production. Your calm, practical support matters more than you think.",
+      "actions": [
+        "Don't suggest formula unless she brings it up — it can feel like you're giving up on her",
+        "Make sure she's eating warm, nourishing food: methi (fenugreek), oats, dal, and soups all support supply",
+        "Reduce stress in the house — keep it quiet, take phone calls elsewhere, hold off visitors",
+        "Encourage feeding on demand rather than by clock — frequent feeding builds supply"
+      ],
+      "what_to_say": "\"I can see how much you care about this. You're doing everything right. Let me make sure you eat well today.\""
+    },
+    {
+      "id": "rec_sleepy_baby",
+      "priority": "low",
+      "match_symptoms": ["sleepy-baby-at-breast"],
+      "match_moods": ["tired", "okay", "rough"],
+      "headline": "Sleepy baby at the breast — help her stay patient",
+      "icon": "bedtime",
+      "color_key": "surface",
+      "summary": "A sleepy baby who won't stay awake to feed is frustrating. Help her keep the environment right and track that the baby is still getting enough.",
+      "actions": [
+        "Keep the room bright and slightly cool during feed times to help baby stay awake",
+        "Skin-to-skin helps — suggest undressing baby to just a nappy against her skin",
+        "After feeds, count wet nappies together — 6+ per day means baby is getting enough",
+        "If baby won't wake for a feed after 4 hours, help her gently rouse the baby (undress, tickle feet)"
+      ],
+      "what_to_say": "\"How many wet nappies today? Let's count together — I think it's going better than it feels.\""
+    },
+    {
+      "id": "rec_tired_no_symptoms",
+      "priority": "low",
+      "match_symptoms": [],
+      "match_moods": ["tired", "rough"],
+      "headline": "She's tired — protect her rest above everything else today",
+      "icon": "hotel",
+      "color_key": "surface",
+      "summary": "No symptoms flagged but she's feeling tired or rough. Rest is the single most important thing right now — it affects milk supply, mood, and recovery.",
+      "actions": [
+        "Take the baby for one full uninterrupted block today — even 90 minutes of sleep is restorative",
+        "Handle all household noise and visitors so she can rest without interruption",
+        "Bring warm food and a drink without waiting to be asked",
+        "One 'you're doing so well' goes further than you'd expect"
+      ],
+      "what_to_say": "\"Go sleep. I've got her. I'll bring food when you wake up.\""
+    },
+    {
+      "id": "rec_okay_stable",
+      "priority": "low",
+      "match_symptoms": [],
+      "match_moods": ["okay"],
+      "headline": "A steady day — keep the conditions that got her here",
+      "icon": "thumb_up",
+      "color_key": "surface",
+      "summary": "She's doing okay today with no symptoms. These stable days are important. Your job is to maintain the environment that helped her get here.",
+      "actions": [
+        "Keep the routine consistent: meals on time, water available, noise low",
+        "Offer to take the baby after the next feed so she can nap",
+        "Check in verbally once — a simple 'how are you really feeling?' is enough",
+        "Plan tomorrow's food now so she doesn't have to think about it"
+      ],
+      "what_to_say": "\"You seem more settled today. What do you need from me to keep that going?\""
+    },
+    {
+      "id": "rec_good_day",
+      "priority": "low",
+      "match_symptoms": [],
+      "match_moods": ["good", "great"],
+      "headline": "She's having a good day — celebrate it and sustain it",
+      "icon": "celebration",
+      "color_key": "green",
+      "summary": "She's logged a positive mood and no symptoms. Acknowledge it — being seen on a good day is just as meaningful as being supported on a bad one.",
+      "actions": [
+        "Tell her you noticed she seems better today — it means a lot to be seen",
+        "Ask if there's something small she'd enjoy (a favourite food, a short walk, a bath alone)",
+        "Don't let her take on too much just because she feels better — rest is still important",
+        "This is a good moment to talk about the next few days: meals, sleep plan, any upcoming concerns"
+      ],
+      "what_to_say": "\"You look so much better today. I'm really proud of you — what would make today feel even better?\""
+    }
+  ],
+
+  "sync_log": [
+    {
+      "sync_id": "sync_001",
+      "direction": "mom_to_partner",
+      "triggered_at": "2026-04-13T20:00:00.000Z",
+      "records_pushed": 7,
+      "status": "success"
+    }
+  ]
+}
