@@ -98,6 +98,17 @@
         .then(function (r) { return r.data || []; });
     },
 
+    /* ── FEEDBACK ───────────────────────────────────────────── */
+    submitFeedback: function (uid, momName, type, message) {
+      if (!ok) return noop();
+      return Promise.resolve(_cli.from('feedback').insert({
+        user_id:  uid     || null,
+        mom_name: momName || null,
+        type:     type    || 'other',
+        message:  message,
+      }));
+    },
+
     /* ── GUIDE VIEWS (analytics) ────────────────────────────── */
     logGuideView: function (uid, slug) {
       if (!ok || !uid) return noop();

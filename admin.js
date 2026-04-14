@@ -13,6 +13,7 @@ var _views       = [];     // all guide_views
 var _activeTab   = 'users';
 var _search      = '';
 var _detailUid   = null;
+var _feedbacks   = [];     // all feedback rows
 
 var MOOD_SCORE  = { rough: 1, tired: 2, okay: 3, good: 4, great: 5 };
 var MOOD_EMOJI  = { rough: '😔', tired: '😴', okay: '🙂', good: '😊', great: '🌟' };
@@ -160,16 +161,18 @@ function loadAllData() {
     _db.from('checkins').select('*').order('date', { ascending: false }),
     _db.from('symptom_tracks').select('*'),
     _db.from('guide_views').select('*'),
+    _db.from('feedback').select('*').order('submitted_at', { ascending: false }),
   ]).then(function (results) {
     var profilesResult = results[0];
     if (profilesResult.error) {
       setRoot('<div class="adm-center"><p style="color:#a73b21;">RLS error loading profiles: ' + esc(profilesResult.error.message) + '</p></div>');
       return;
     }
-    _profiles = (profilesResult.data || []);
-    _checkins = (results[1].data || []);
-    _tracks   = (results[2].data || []);
-    _views    = (results[3].data || []);
+    _profiles  = (profilesResult.data || []);
+    _checkins  = (results[1].data || []);
+    _tracks    = (results[2].data || []);
+    _views     = (results[3].data || []);
+    _feedbacks = (results[4].data || []);
     renderDashboard();
   }).catch(function (e) {
     setRoot('<div class="adm-center"><p style="color:#a73b21;">Failed to load data: ' + esc(e.message) + '</p></div>');
@@ -198,6 +201,7 @@ function renderDashboard() {
       tabBtn('users',    'group',       'Users')    +
       tabBtn('symptoms', 'favorite',    'Symptoms') +
       tabBtn('guides',   'menu_book',   'Guide usage') +
+      tabBtn('feedback', 'chat_bubble', 'Feedback' + (_feedbacks.length ? ' (' + _feedbacks.length + ')' : '')) +
     '</div>' +
     '<div id="adm-tab-content"></div>' +
     '</div>';
@@ -238,7 +242,8 @@ function showTab(tab) {
 
   // Update tab active class
   document.querySelectorAll('.adm-tab').forEach(function (b) {
-    b.classList.toggle('active', b.textContent.toLowerCase().indexOf(tab === 'users' ? 'user' : tab === 'symptoms' ? 'symptom' : 'guide') > -1);
+    var key = tab === 'users' ? 'user' : tab === 'symptoms' ? 'symptom' : tab === 'guides' ? 'guide' : 'feedback';
+    b.classList.toggle('active', b.textContent.toLowerCase().indexOf(key) > -1);
   });
 
   var el = document.getElementById('adm-tab-content');
@@ -247,6 +252,7 @@ function showTab(tab) {
   if (tab === 'users')    el.innerHTML = renderUsersTab();
   if (tab === 'symptoms') el.innerHTML = renderSymptomsTab();
   if (tab === 'guides')   el.innerHTML = renderGuidesTab();
+  if (tab === 'feedback') el.innerHTML = renderFeedbackTab();
 }
 
 /* ── Users tab ───────────────────────────────────────────────── */
@@ -507,6 +513,36 @@ function buildDetailGraph(checkins) {
     xGrid+lines+dots+
     '<text x="'+(PL+W/2).toFixed(1)+'" y="'+(VH-2)+'" text-anchor="middle" font-size="8" fill="#797c76">day (1–40)</text>'+
   '</svg>';
+}
+
+/* ── Feedback tab ────────────────────────────────────────────── */
+function renderFeedbackTab() {
+  if (!_feedbacks.length) return '<div class="adm-empty">No feedback submitted yet.</div>';
+
+  var TYPE_ICON  = { bug: '🐛', idea: '💡', love: '❤️', other: '💬' };
+  var TYPE_COLOR = { bug: 'red', idea: 'yellow', love: 'green', other: 'grey' };
+
+  var rows = _feedbacks.map(function (f) {
+    var icon  = TYPE_ICON[f.type]  || '💬';
+    var color = TYPE_COLOR[f.type] || 'grey';
+    var name  = f.mom_name && f.mom_name !== 'Mama' ? f.mom_name : 'Anonymous';
+    var dt    = f.submitted_at
+      ? new Date(f.submitted_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
+      : '—';
+    return '<div class="adm-fb-row">' +
+      '<div class="adm-fb-meta">' +
+        '<span class="adm-pill adm-pill-' + color + '">' + icon + ' ' + esc(f.type || 'other') + '</span>' +
+        '<span class="adm-fb-who">' + esc(name) + '</span>' +
+        '<span class="adm-fb-date">' + esc(dt) + '</span>' +
+      '</div>' +
+      '<div class="adm-fb-msg">' + esc(f.message) + '</div>' +
+    '</div>';
+  }).join('');
+
+  return '<div class="adm-table-wrap" style="padding:1.25rem;">' +
+    '<p style="font-size:.8125rem;color:#797c76;margin-bottom:1rem;">' + _feedbacks.length + ' submission' + (_feedbacks.length !== 1 ? 's' : '') + ', newest first.</p>' +
+    '<div class="adm-fb-list">' + rows + '</div>' +
+  '</div>';
 }
 
 /* ── Helpers ─────────────────────────────────────────────────── */

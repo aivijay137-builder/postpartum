@@ -1367,8 +1367,84 @@ function showSettings() {
         ) +
       '</div>' +
     '</div>' +
+    '<div class="settings-section">' +
+      '<div class="settings-card">' +
+        '<div class="settings-row" style="cursor:pointer;" onclick="openFeedbackModal()">' +
+          '<div class="sr-icon sr-icon-grey"><span class="material-symbols-outlined">chat_bubble</span></div>' +
+          '<div class="sr-body"><div class="sr-title">Send feedback</div><div class="sr-sub">Help us improve Navya</div></div>' +
+          '<div class="sr-action"><span class="material-symbols-outlined" style="color:var(--on-surface-var);font-size:1.25rem;">chevron_right</span></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+
     '</div>'
   );
+}
+
+/* ── Feedback modal ─────────────────────────────────────────── */
+var _fbType = 'other';
+
+function openFeedbackModal() {
+  if (document.getElementById('feedback-overlay')) return;
+  var overlay = document.createElement('div');
+  overlay.id = 'feedback-overlay';
+  overlay.className = 'fb-overlay';
+  overlay.innerHTML =
+    '<div class="fb-modal">' +
+      '<div class="fb-header">' +
+        '<p class="fb-title">Send feedback</p>' +
+        '<button class="fb-close" onclick="closeFeedbackModal()" aria-label="Close"><span class="material-symbols-outlined">close</span></button>' +
+      '</div>' +
+      '<p class="fb-sub">What\'s on your mind?</p>' +
+      '<div class="fb-type-row">' +
+        '<button class="fb-chip" id="fb-chip-bug"   onclick="pickFbType(\'bug\')">\uD83D\uDC1B Bug</button>' +
+        '<button class="fb-chip" id="fb-chip-idea"  onclick="pickFbType(\'idea\')">\uD83D\uDCA1 Idea</button>' +
+        '<button class="fb-chip" id="fb-chip-love"  onclick="pickFbType(\'love\')">\u2764\uFE0F Love it</button>' +
+        '<button class="fb-chip" id="fb-chip-other" onclick="pickFbType(\'other\')">\uD83D\uDCAC Other</button>' +
+      '</div>' +
+      '<textarea class="fb-textarea" id="fb-text" placeholder="Tell us more\u2026" rows="4"></textarea>' +
+      '<p class="fb-error" id="fb-err" style="display:none;"></p>' +
+      '<button class="fb-submit" id="fb-submit-btn" onclick="sendFeedback()">Send feedback</button>' +
+    '</div>';
+  document.body.appendChild(overlay);
+  _fbType = 'other';
+  pickFbType('other');
+  setTimeout(function () { var t = document.getElementById('fb-text'); if (t) t.focus(); }, 80);
+}
+
+function pickFbType(type) {
+  _fbType = type;
+  ['bug','idea','love','other'].forEach(function (t) {
+    var el = document.getElementById('fb-chip-' + t);
+    if (el) el.classList.toggle('selected', t === type);
+  });
+}
+
+function sendFeedback() {
+  var msg   = ((document.getElementById('fb-text') || {}).value || '').trim();
+  var errEl = document.getElementById('fb-err');
+  var btn   = document.getElementById('fb-submit-btn');
+  if (!msg) {
+    if (errEl) { errEl.textContent = 'Please write something before sending.'; errEl.style.display = ''; }
+    return;
+  }
+  if (btn) btn.disabled = true;
+  if (errEl) errEl.style.display = 'none';
+  var profile = getProfile();
+  SB.submitFeedback(_currentUserId || null, profile.name, _fbType, msg)
+    .then(function () {
+      closeFeedbackModal();
+      showToast('Thank you! Your feedback was sent.');
+    })
+    .catch(function () {
+      if (errEl) { errEl.textContent = 'Could not send — check your connection.'; errEl.style.display = ''; }
+      if (btn) btn.disabled = false;
+    });
+}
+
+function closeFeedbackModal() {
+  var el = document.getElementById('feedback-overlay');
+  if (el) el.remove();
 }
 
 function settingsPartnerLinkRow() {
